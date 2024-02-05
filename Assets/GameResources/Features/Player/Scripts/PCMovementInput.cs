@@ -2,6 +2,9 @@ namespace Tanks.Features.Player
 {
     using UnityEngine;
 
+    /// <summary>
+    /// Обработчик инпута движения для ПК
+    /// </summary>
     public class PCMovementInput : MonoBehaviour
     {
         [SerializeField]
