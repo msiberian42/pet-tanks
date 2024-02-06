@@ -12,12 +12,20 @@
         protected PlayerShootingController controller = default;
 
         protected Camera cam = default;
+        protected Vector3 mousePos = default;
 
         protected virtual void Awake() => cam = Camera.main;
 
         protected virtual void Update()
         {
-            controller.RotateTurret(cam.ScreenToWorldPoint(Input.mousePosition));
+            mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+            controller.RotateTurret(mousePos);
+
+            if (Input.GetMouseButtonDown(0) && controller.IsLoaded)
+            {
+                controller.Shoot(mousePos);
+            }
         }
     }
 }
