@@ -28,13 +28,13 @@
             pool = FindAnyObjectByType<PlayerProjectilePool>();
         }
 
-        protected virtual void OnEnable()
-        {
+        protected virtual void OnEnable() => 
             lifetimeRoutine = StartCoroutine(LifetimeRoutine());
-        }
 
         protected virtual void OnDisable()
         {
+            rb.velocity = Vector3.zero;
+
             if (lifetimeRoutine != null)
             {
                 StopCoroutine(lifetimeRoutine);

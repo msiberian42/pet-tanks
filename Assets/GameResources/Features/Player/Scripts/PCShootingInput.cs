@@ -22,7 +22,7 @@
 
             controller.RotateTurret(mousePos);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && controller.IsLoaded)
             {
                 controller.Shoot(mousePos);
             }
