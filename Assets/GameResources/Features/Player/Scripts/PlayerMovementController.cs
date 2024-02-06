@@ -37,8 +37,7 @@ namespace Tanks.Features.Player
         protected virtual void FixedUpdate()
         {
             if ((Mathf.Abs(horizontalInput) >= DELTA || Mathf.Abs(verticalInput) >= DELTA)
-                && (Mathf.Approximately(transform.rotation.z, targetRotation.z)
-                    || Mathf.Approximately(transform.rotation.w, targetRotation.w)))
+                && (Mathf.Abs(targetRotation.eulerAngles.z - transform.eulerAngles.z) <= 90))
             {
                 Move();
             }
