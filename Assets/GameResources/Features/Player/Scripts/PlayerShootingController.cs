@@ -1,9 +1,9 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
 
     /// <summary>
-    /// Контроллер башни игрока
+    /// РљРѕРЅС‚СЂРѕР»Р»РµСЂ Р±Р°С€РЅРё РёРіСЂРѕРєР°
     /// </summary>
     public class PlayerShootingController : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace Tanks.Features.Player
         protected float angle = 0f;
 
         /// <summary>
-        /// Вращает башню
+        /// Р’СЂР°С‰Р°РµС‚ Р±Р°С€РЅСЋ
         /// </summary>
         /// <param name="target"></param>
         public virtual void RotateTurret(Vector3 target)

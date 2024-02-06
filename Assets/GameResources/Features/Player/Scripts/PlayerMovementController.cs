@@ -1,9 +1,9 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
 
     /// <summary>
-    /// Контроллер движения игрока
+    /// РљРѕРЅС‚СЂРѕР»Р»РµСЂ РґРІРёР¶РµРЅРёСЏ РёРіСЂРѕРєР°
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovementController : MonoBehaviour
@@ -48,7 +48,7 @@ namespace Tanks.Features.Player
         }
 
         /// <summary>
-        /// Задает значение инпута
+        /// Р—Р°РґР°РµС‚ Р·РЅР°С‡РµРЅРёРµ РёРЅРїСѓС‚Р°
         /// </summary>
         /// <param name="horizontal"></param>
         /// <param name="vertical"></param>

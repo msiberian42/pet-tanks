@@ -1,9 +1,9 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
 
     /// <summary>
-    /// Скрипт для привязки камеры к игроку
+    /// РЎРєСЂРёРїС‚ РґР»СЏ РїСЂРёРІСЏР·РєРё РєР°РјРµСЂС‹ Рє РёРіСЂРѕРєСѓ
     /// </summary>
     public class MainCameraFollower : MonoBehaviour
     {

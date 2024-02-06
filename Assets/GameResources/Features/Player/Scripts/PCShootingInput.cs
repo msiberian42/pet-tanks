@@ -1,10 +1,10 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
     using static UnityEngine.GraphicsBuffer;
 
     /// <summary>
-    /// Обработчик инпута стрельбы с ПК
+    /// РћР±СЂР°Р±РѕС‚С‡РёРє РёРЅРїСѓС‚Р° СЃС‚СЂРµР»СЊР±С‹ СЃ РџРљ
     /// </summary>
     public class PCShootingInput : MonoBehaviour
     {

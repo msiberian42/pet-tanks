@@ -1,9 +1,9 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
 
     /// <summary>
-    /// Обработчик инпута движения для ПК
+    /// РћР±СЂР°Р±РѕС‚С‡РёРє РёРЅРїСѓС‚Р° РґРІРёР¶РµРЅРёСЏ РґР»СЏ РџРљ
     /// </summary>
     public class PCMovementInput : MonoBehaviour
     {
