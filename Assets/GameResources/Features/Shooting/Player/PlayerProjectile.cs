@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Shooting
 {
+    using Tanks.Features.Enemies;
     using UnityEngine;
 
     /// <summary>
@@ -10,7 +11,7 @@
     {
         protected float speed = 10f;
         protected float damage = 1f;
-
+        protected EnemyHealthController enemyHealthController = default;
         protected override void Awake()
         {
             base.Awake();
@@ -38,6 +39,15 @@
         {
             if (collision.gameObject.layer == WALLS_LAYER)
             {
+                pool.ReleaseObject(this);
+                return;
+            }
+
+            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+
+            if (enemyHealthController != null)
+            {
+                enemyHealthController.ChangeHealthValue(-damage);
                 pool.ReleaseObject(this);
             }
         }

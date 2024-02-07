@@ -19,7 +19,9 @@
         [SerializeField]
         protected Transform shootingPoint = default;
         [SerializeField]
-        protected float shootingForce = 10f;
+        protected float projectileSpeed = 10f;
+        [SerializeField]
+        protected float projectileDamage = 35f;
         [SerializeField]
         protected float reloadCooldown = 1f;
 
@@ -63,7 +65,8 @@
 
             proj.transform.position = shootingPoint.position;
             proj.transform.rotation = turret.transform.rotation;
-            proj.SetSpeed(shootingForce);
+            proj.SetSpeed(projectileSpeed);
+            proj.SetDamage(projectileDamage);
 
             isLoaded = false;
             StartCoroutine(LoadingRoutine());

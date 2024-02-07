@@ -1,11 +1,12 @@
-﻿namespace Tanks.Features.Player
+﻿namespace Tanks.Features.Enemies
 {
     using UnityEngine;
 
     /// <summary>
-    /// Контроллер здоровья игрока
+    /// Контроллер здоровья врага
     /// </summary>
-    public class PlayerHealthController : MonoBehaviour
+    [RequireComponent(typeof(Collider2D))]
+    public class EnemyHealthController : MonoBehaviour
     {
         /// <summary>
         /// Максимальное значение здоровья
@@ -15,10 +16,10 @@
         /// <summary>
         /// Текущее значение здоровья
         /// </summary>
-        public float CurrentHealthValue 
-        { 
+        public float CurrentHealthValue
+        {
             get => currentHealthValue;
-            protected set 
+            protected set
             {
                 currentHealthValue = Mathf.Clamp(value, 0, MaxHealth);
             }
