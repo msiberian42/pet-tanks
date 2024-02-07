@@ -1,6 +1,7 @@
 namespace Tanks.Features.UI
 {
     using UnityEngine;
+    using UnityEngine.UI;
 
     /// <summary>
     /// Кастомное отображение курсора
@@ -8,12 +9,21 @@ namespace Tanks.Features.UI
     public class CursorView : MonoBehaviour
     {
         [SerializeField]
-        protected Texture2D cursorTexture = default;
+        protected Image cursorSprite = default;
 
-        protected virtual void OnEnable() => 
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        protected virtual void OnEnable()
+        {
+            Cursor.visible = false;
+            cursorSprite.enabled = true;
+        }
 
-        protected virtual void OnDisable() =>
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        protected virtual void Update() => 
+            cursorSprite.transform.position = Input.mousePosition;
+
+        protected virtual void OnDisable()
+        {
+            Cursor.visible = true;
+            cursorSprite.enabled = false;
+        }
     }
 }

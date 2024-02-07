@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Player
 {
+    using System;
     using System.Collections;
     using UnityEngine;
     using Tanks.Features.Shooting;
@@ -13,6 +14,21 @@
         /// Пушка перезаряжена
         /// </summary>
         public bool IsLoaded => isLoaded;
+
+        /// <summary>
+        /// Перезарядка началась
+        /// </summary>
+        public event Action onReloadingStartedEvent = delegate { };
+
+        /// <summary>
+        /// Перезарядка закончена
+        /// </summary>
+        public event Action onReloadingFinishedEvent = delegate { };
+
+        /// <summary>
+        /// Время перезарядки
+        /// </summary>
+        public float ReloadCooldown => reloadCooldown;
 
         [SerializeField]
         protected Transform turret = default;
@@ -74,9 +90,12 @@
 
         protected virtual IEnumerator LoadingRoutine()
         {
+            onReloadingStartedEvent();
+
             yield return new WaitForSeconds(reloadCooldown);
 
             isLoaded = true;
+            onReloadingFinishedEvent();
         }
     }
 }
