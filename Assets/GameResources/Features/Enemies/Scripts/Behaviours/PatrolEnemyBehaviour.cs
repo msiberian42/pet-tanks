@@ -8,12 +8,6 @@
     [CreateAssetMenu(menuName = "Enemies/Behaviours/Patrol", fileName = "Patrol Enemy Behaviour")]
     public class PatrolEnemyBehaviour : BaseEnemyBehaviour
     {
-        [SerializeField]
-        protected ChasingEnemyBehaviour chasingBehaviour = default;
-
-        [SerializeField, Header("Дистанция, на которой враг начинает преследование")]
-        protected float chasingRange = 25;
-
         protected EnemyBehaviourController controller = default;
         protected Transform target = default;
         protected float distanceToTarget = 0f;
@@ -31,12 +25,7 @@
 
         public override void OnUpdate()
         {
-            distanceToTarget = Vector3.Distance(controller.transform.position, target.position);
-
-            if (distanceToTarget <= chasingRange && controller.PlayerIsVisible())
-            {
-                controller.SetCurrentBehaviour(chasingBehaviour);
-            }
+            controller.Move(controller.transform.position);
         }
     }
 }

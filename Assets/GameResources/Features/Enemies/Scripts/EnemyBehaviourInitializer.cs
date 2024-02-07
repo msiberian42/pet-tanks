@@ -8,12 +8,31 @@
     /// </summary>
     public class EnemyBehaviourInitializer : MonoBehaviour
     {
+        /// <summary>
+        /// Патрулирование
+        /// </summary>
+        public PatrolEnemyBehaviour PatrolBehaviourInstance => patrolBehaviourInstance;
+
+        /// <summary>
+        /// Преследование
+        /// </summary>
+        public ChasingEnemyBehaviour ChasingBehaviourInstance => chasingBehaviourInstance;
+
+        /// <summary>
+        /// Атака
+        /// </summary>
+        public AttackEnemyBehaviour AttackBehaviourInstance => attackBehaviourInstance;
+
         [SerializeField]
         protected ChasingEnemyBehaviour chasingBehaviour = default;
         [SerializeField]
         protected PatrolEnemyBehaviour patrolBehaviour = default;
         [SerializeField]
         protected AttackEnemyBehaviour attackBehaviour = default;
+
+        protected PatrolEnemyBehaviour patrolBehaviourInstance = default;
+        protected ChasingEnemyBehaviour chasingBehaviourInstance = default;
+        protected AttackEnemyBehaviour attackBehaviourInstance = default;
 
         [SerializeField]
         protected EnemyBehaviourController controller = default;
@@ -24,9 +43,30 @@
         {
             player = FindAnyObjectByType<PlayerMovementController>();
 
-            patrolBehaviour.Init(controller, player.transform);
-            chasingBehaviour.Init(controller, player.transform);
-            attackBehaviour.Init();
+            patrolBehaviourInstance = Instantiate(patrolBehaviour);
+            chasingBehaviourInstance = Instantiate(chasingBehaviour);
+            attackBehaviourInstance = Instantiate(attackBehaviour);
+
+            patrolBehaviourInstance.Init(controller, player.transform);
+            chasingBehaviourInstance.Init(controller, player.transform);
+            attackBehaviourInstance.Init();
         }
+
+        protected virtual void OnEnable() => SetPatrolBehaviour();
+
+        /// <summary>
+        /// Переводит врага в патрулирование
+        /// </summary>
+        public virtual void SetPatrolBehaviour() => controller.SetCurrentBehaviour(patrolBehaviourInstance);
+
+        /// <summary>
+        /// Переводит врага в преследование
+        /// </summary>
+        public virtual void SetChasingBehaviour() => controller.SetCurrentBehaviour(chasingBehaviourInstance);
+
+        /// <summary>
+        /// Переводит врага в атаку
+        /// </summary>
+        public virtual void SetAttackBehaviour() => controller.SetCurrentBehaviour(attackBehaviourInstance);
     }
 }

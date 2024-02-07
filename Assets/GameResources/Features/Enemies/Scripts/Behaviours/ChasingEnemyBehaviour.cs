@@ -29,16 +29,16 @@ namespace Tanks.Features.Enemies
         /// Инициализирует поведение
         /// </summary>
         /// <param name="controller"></param>
-        /// <param name="target"></param>
-        public virtual void Init(EnemyBehaviourController controller, Transform target)
+        /// <param name="player"></param>
+        public virtual void Init(EnemyBehaviourController controller, Transform player)
         {
             this.controller = controller;
-            this.target = target;
+            this.target = player;
         }
 
         public override void OnUpdate()
         {
-            distanceToTarget = Vector3.Distance(controller.transform.position, target.position);
+            /*distanceToTarget = Vector3.Distance(controller.transform.position, target.position);
 
             if (distanceToTarget >= patrolRange)
             {
@@ -50,9 +50,9 @@ namespace Tanks.Features.Enemies
             {
                 controller.SetCurrentBehaviour(attackBehaviour);
                 return;
-            }
+            }*/
 
-            if (controller.PlayerIsVisible())
+            if (controller.PlayerIsVisible)
             {
                 lastPlayerPos = target.position;
                 controller.Move(lastPlayerPos);

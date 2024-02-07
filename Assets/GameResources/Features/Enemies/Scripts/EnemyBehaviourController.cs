@@ -11,8 +11,18 @@
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyBehaviourController : MonoBehaviour
     {
+        /// <summary>
+        /// Текущее поведение врага
+        /// </summary>
+        public BaseEnemyBehaviour CurrentBehaviour => currentBehaviour;
+
+        /// <summary>
+        /// Игрок в зоне видимости врага
+        /// </summary>
+        public bool PlayerIsVisible {  get; protected set; }
+
         [SerializeField, Header("Частота обновления информации о позиции игрока")]
-        protected float playerPosUpdateRate = 1f;
+        protected float playerPosUpdateRate = 0.5f;
 
         [SerializeField]
         protected float visionRange = 30f;
@@ -23,15 +33,12 @@
         [SerializeField]
         protected LayerMask wallsLayer = default;
 
-        [SerializeField]
-        protected BaseEnemyBehaviour startBehaviour = default;
-
         protected BaseEnemyBehaviour currentBehaviour = default;
 
         protected NavMeshAgent agent = default;
         protected PlayerMovementController player = default;
-        protected Coroutine checkPlayerPositionRoutine = default;
-        protected float distanceToPlayer = default;
+        protected Coroutine checkPlayerRoutine = default;
+
         protected Vector3 direction = default;
         protected float angle = 0f;
         protected Quaternion targetRotation = default;
@@ -48,20 +55,25 @@
 
         protected virtual void OnEnable()
         {
-            currentBehaviour = startBehaviour;
-            checkPlayerPositionRoutine = StartCoroutine(CheckPlayerPositionRoutine());
+            checkPlayerRoutine = StartCoroutine(CheckPlayerRoutine());
         }
 
         protected virtual void OnDisable()
         {
-            if (checkPlayerPositionRoutine != null)
+            if (checkPlayerRoutine != null)
             {
-                StopCoroutine(checkPlayerPositionRoutine);
-                checkPlayerPositionRoutine = null;
+                StopCoroutine(checkPlayerRoutine);
+                checkPlayerRoutine = null;
             }
         }
 
-        protected virtual void Update() => RotateTank(target);
+        protected virtual void Update()
+        {
+            RotateTank(target);
+
+            Debug.Log(currentBehaviour);
+            currentBehaviour.OnUpdate();
+        }
 
         /// <summary>
         /// Меняет поведение врага
@@ -70,28 +82,11 @@
         public virtual void SetCurrentBehaviour(BaseEnemyBehaviour behaviour) => 
             currentBehaviour = behaviour;
 
-        protected virtual IEnumerator CheckPlayerPositionRoutine()
+        protected virtual IEnumerator CheckPlayerRoutine()
         {
             while (isActiveAndEnabled)
             {
-                /*distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-
-                if (distanceToPlayer > aggroRange)
-                {
-                    currentBehaviour = patrolBehaviour;
-                }
-                else
-                {
-                    currentBehaviour = chasingBehaviour;
-                }
-
-                if (distanceToPlayer <= attackingDistance && PlayerIsVisible())
-                {
-                    currentBehaviour = attackBehaviour;
-                }*/
-
-                Debug.Log(currentBehaviour);
-                currentBehaviour.OnUpdate();
+                PlayerIsVisible = CheckPlayerVisible();
 
                 yield return new WaitForSeconds(playerPosUpdateRate);
             }
@@ -107,11 +102,7 @@
             agent.SetDestination(target);
         }
 
-        /// <summary>
-        /// Находится ли игрок в зоне видимости врага
-        /// </summary>
-        /// <returns></returns>
-        public virtual bool PlayerIsVisible()
+        protected virtual bool CheckPlayerVisible()
         {
             if (Vector3.Distance(transform.position, player.transform.position) > visionRange)
             {
