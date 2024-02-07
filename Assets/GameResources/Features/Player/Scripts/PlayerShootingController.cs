@@ -29,6 +29,7 @@
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected bool isLoaded = true;
+        protected BaseProjectile proj = default;
 
         protected virtual void Awake() => 
             projPool = FindAnyObjectByType<PlayerProjectilePool>();
@@ -58,9 +59,10 @@
 
             shootDirection.Normalize();
 
-            PlayerProjectile proj = projPool.GetProjectile();
+            proj = projPool.GetProjectile();
 
             proj.transform.position = shootingPoint.position;
+            proj.Rb.velocity = Vector2.zero;
             proj.Rb.AddForce(shootDirection * shootingForce);
 
             isLoaded = false;

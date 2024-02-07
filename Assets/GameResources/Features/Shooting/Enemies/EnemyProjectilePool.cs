@@ -1,21 +1,22 @@
 ﻿namespace Tanks.Features.Shooting
 {
+    using Tanks.Features.Pool;
     using UnityEngine;
     using UnityEngine.Pool;
 
     /// <summary>
-    /// Пул снарядов игрока
+    /// Пул снарядов врага
     /// </summary>
-    public class PlayerProjectilePool : MonoBehaviour
+    public class EnemyProjectilePool : BasePool
     {
         [SerializeField]
-        protected PlayerProjectile prefab = default;
+        protected EnemyProjectile prefab = default;
 
-        protected ObjectPool<PlayerProjectile> projPool = default;
+        protected ObjectPool<BaseProjectile> projPool = default;
 
         protected virtual void Awake()
         {
-            projPool = new ObjectPool<PlayerProjectile>(
+            projPool = new ObjectPool<BaseProjectile>(
                 createFunc: () => Instantiate(prefab, gameObject.transform),
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
@@ -26,13 +27,13 @@
         }
 
         /// <summary>
-        /// Возвращает врага из пула
+        /// Возвращает снаряд из пула
         /// </summary>
-        public virtual PlayerProjectile GetProjectile() => projPool.Get();
+        public override BaseProjectile GetProjectile() => projPool.Get();
 
         /// <summary>
-        /// Возвращает врага в пул
+        /// Возвращает снаряд в пул
         /// </summary>
-        public virtual void ReleaseProjectile(PlayerProjectile proj) => projPool.Release(proj);
+        public override void ReleaseProjectile(BaseProjectile proj) => projPool.Release(proj);
     }
 }

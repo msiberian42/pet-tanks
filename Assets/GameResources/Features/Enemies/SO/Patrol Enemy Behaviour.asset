@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed609999e8b71d40ae765cb8af69977, type: 3}
+  m_Name: Patrol Enemy Behaviour
+  m_EditorClassIdentifier: 
+  chasingBehaviour: {fileID: 11400000, guid: 121faa68eed91754995effec7d026185, type: 2}
+  chasingRange: 25

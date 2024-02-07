@@ -2,17 +2,17 @@
 {
     using System.Collections;
     using UnityEngine;
+    using Tanks.Features.Pool;
 
     /// <summary>
-    /// Снаряд игрока
+    /// Базовый снаряд
     /// </summary>
-    [RequireComponent(typeof(Collider2D)), RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerProjectile : MonoBehaviour
+    public abstract class BaseProjectile : MonoBehaviour
     {
         [SerializeField]
         protected float lifetime = 6f;
 
-        protected PlayerProjectilePool pool = default;
+        protected BasePool pool = default;
         protected Coroutine lifetimeRoutine = default;
 
         /// <summary>
@@ -22,13 +22,9 @@
 
         protected Rigidbody2D rb = default;
 
-        protected virtual void Awake()
-        {
-            rb = GetComponent<Rigidbody2D>();
-            pool = FindAnyObjectByType<PlayerProjectilePool>();
-        }
+        protected virtual void Awake() => rb = GetComponent<Rigidbody2D>();
 
-        protected virtual void OnEnable() => 
+        protected virtual void OnEnable() =>
             lifetimeRoutine = StartCoroutine(LifetimeRoutine());
 
         protected virtual void OnDisable()

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6757527811167029826}
   - component: {fileID: 8491396123847322572}
-  - component: {fileID: 5961550538861194273}
+  - component: {fileID: 390841600629816920}
   - component: {fileID: 2247993474669909149}
   - component: {fileID: 1690363178103165278}
   m_Layer: 0
-  m_Name: PlayerProjectile
+  m_Name: EnemyProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 180
   m_Sprite: {fileID: 21300000, guid: 365b3fc529869a141bcc7c957a114269, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.45660377, b: 0.45660377, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5961550538861194273
+--- !u!114 &390841600629816920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,9 +96,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1026184093496083758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 311d0f81e7ce71b45aec6d90023aef12, type: 3}
+  m_Script: {fileID: 11500000, guid: 1077ad82e4f89d3408782d829e23acc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifetime: 6
 --- !u!58 &2247993474669909149
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -128,7 +129,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
