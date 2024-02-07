@@ -29,11 +29,11 @@
         /// <summary>
         /// Возвращает снаряд из пула
         /// </summary>
-        public override BaseProjectile GetProjectile() => projPool.Get();
+        public override BaseProjectile GetObject() => projPool.Get();
 
         /// <summary>
         /// Возвращает снаряд в пул
         /// </summary>
-        public override void ReleaseProjectile(BaseProjectile proj) => projPool.Release(proj);
+        public override void ReleaseObject(BaseProjectile proj) => projPool.Release(proj);
     }
 }

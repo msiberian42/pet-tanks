@@ -13,7 +13,10 @@
         protected float reloadCooldown = 1f;
 
         [SerializeField]
-        protected float shootingForce = 10f;
+        protected float projectileSpeed = 10f;
+
+        [SerializeField]
+        protected float projectileDamage = 10f;
 
         protected EnemyBehaviourController controller = default;
         protected EnemyBehaviourInitializer initializer = default;
@@ -79,12 +82,13 @@
 
             shootDirection.Normalize();
 
-            projectile = (EnemyProjectile)projectilePool.GetProjectile();
+            projectile = (EnemyProjectile)projectilePool.GetObject();
 
             projectile.transform.position = shootingPoint.position;
             projectile.transform.position = shootingPoint.position;
             projectile.transform.rotation = turret.transform.rotation;
-            projectile.SetSpeed(shootingForce);
+            projectile.SetSpeed(projectileSpeed);
+            projectile.SetDamage(projectileDamage);
 
             controller.StartReloading();
         }

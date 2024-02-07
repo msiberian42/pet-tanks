@@ -59,7 +59,7 @@
 
             shootDirection.Normalize();
 
-            proj = (PlayerProjectile)projPool.GetProjectile();
+            proj = (PlayerProjectile)projPool.GetObject();
 
             proj.transform.position = shootingPoint.position;
             proj.transform.rotation = turret.transform.rotation;

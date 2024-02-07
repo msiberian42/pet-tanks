@@ -11,11 +11,11 @@
         /// <summary>
         /// Возвращает врага из пула
         /// </summary>
-        public abstract BaseProjectile GetProjectile();
+        public abstract BaseProjectile GetObject();
 
         /// <summary>
         /// Возвращает врага в пул
         /// </summary>
-        public abstract void ReleaseProjectile(BaseProjectile proj);
+        public abstract void ReleaseObject(BaseProjectile proj);
     }
 }
