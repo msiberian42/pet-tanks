@@ -26,7 +26,6 @@
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected BaseProjectile projectile = default;
-        protected Vector3 prevRotation = default;
 
         public virtual void Init(EnemyBehaviourController controller, 
             EnemyBehaviourInitializer initializer, EnemyProjectilePool projectilePool,
@@ -42,11 +41,7 @@
             controller.SetReloadingCooldown(reloadCooldown);
         }
 
-        public override void OnStateEnter()
-        {
-            prevRotation = controller.transform.eulerAngles;
-            controller.Agent.isStopped = true;
-        }
+        public override void OnStateEnter() => controller.Agent.isStopped = true;
 
         public override void OnStateExit() => controller.Agent.isStopped = false;
 
@@ -59,11 +54,6 @@
                 if (controller.IsLoaded)
                 {
                     Shoot(target.position);
-                }
-
-                if (controller.transform.eulerAngles != prevRotation)
-                {
-                    controller.transform.eulerAngles = prevRotation;
                 }
             }
             else

@@ -51,7 +51,6 @@
         protected Vector3 direction = default;
         protected float angle = 0f;
         protected Quaternion targetRotation = default;
-        protected Vector3 target = default;
 
         protected virtual void Awake()
         {
@@ -77,11 +76,7 @@
             }
         }
 
-        protected virtual void Update()
-        {
-            RotateTank(target);
-            currentBehaviour.OnUpdate();
-        }
+        protected virtual void Update() => currentBehaviour.OnUpdate();
 
         /// <summary>
         /// Меняет поведение врага
@@ -98,13 +93,13 @@
         /// Двигает врага к указанной точке
         /// </summary>
         /// <param name="target"></param>
-        public virtual void Move(Vector3 target)
-        {
-            this.target = target;
-            Agent.SetDestination(target);
-        }
+        public virtual void Move(Vector3 target) => Agent.SetDestination(target);
 
-        protected virtual void RotateTank(Vector3 target)
+        /// <summary>
+        /// Поворачивает танк
+        /// </summary>
+        /// <param name="target"></param>
+        public virtual void RotateTank(Vector3 target)
         {
             direction = new Vector2(-Agent.velocity.x, Agent.velocity.y).normalized;
 

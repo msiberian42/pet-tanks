@@ -35,16 +35,19 @@ namespace Tanks.Features.Enemies
             {
                 lastPlayerPos = target.position;
                 controller.Move(lastPlayerPos);
+                controller.RotateTank(lastPlayerPos);
             }
             else if (lastPlayerPos != default 
                 && Vector3.Distance(controller.transform.position, lastPlayerPos) >= 1f)
             {
                 controller.Move(lastPlayerPos);
+                controller.RotateTank(lastPlayerPos);
             }
             else if (lastPlayerPos != default)
             {
                 lastPlayerPos = target.position;
                 controller.Move(lastPlayerPos);
+                controller.RotateTank(lastPlayerPos);
             }
         }
     }
