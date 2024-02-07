@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed609999e8b71d40ae765cb8af69977, type: 3}
   m_Name: Patrol Enemy Behaviour
   m_EditorClassIdentifier: 
+  chasingBehaviour: {fileID: 11400000, guid: 121faa68eed91754995effec7d026185, type: 2}
+  chasingRange: 25

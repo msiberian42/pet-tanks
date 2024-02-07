@@ -919,6 +919,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1554175532}
   - component: {fileID: 1554175531}
+  - component: {fileID: 1554175533}
   - component: {fileID: 1554175530}
   - component: {fileID: 1554175529}
   - component: {fileID: 1554175528}
@@ -1036,15 +1037,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPosUpdateRate: 1
-  attackingDistance: 12
-  aggroRange: 25
+  visionRange: 25
   rotationSpeed: 180
   wallsLayer:
     serializedVersion: 2
     m_Bits: 64
-  chasingBehaviour: {fileID: 11400000, guid: 121faa68eed91754995effec7d026185, type: 2}
-  patrolBehaviour: {fileID: 11400000, guid: c17fffccd8252ad4abd8252250e9676e, type: 2}
-  attackBehaviour: {fileID: 11400000, guid: ba614fb40fd7231488905e6b7e125b2a, type: 2}
+  startBehaviour: {fileID: 11400000, guid: c17fffccd8252ad4abd8252250e9676e, type: 2}
 --- !u!4 &1554175532
 Transform:
   m_ObjectHideFlags: 0
@@ -1061,6 +1059,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1554175533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554175527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3b0c490f875314ab8388948d7ed748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chasingBehaviour: {fileID: 11400000, guid: 121faa68eed91754995effec7d026185, type: 2}
+  patrolBehaviour: {fileID: 11400000, guid: c17fffccd8252ad4abd8252250e9676e, type: 2}
+  attackBehaviour: {fileID: 11400000, guid: ba614fb40fd7231488905e6b7e125b2a, type: 2}
+  controller: {fileID: 1554175531}
 --- !u!1 &1568217145
 GameObject:
   m_ObjectHideFlags: 0

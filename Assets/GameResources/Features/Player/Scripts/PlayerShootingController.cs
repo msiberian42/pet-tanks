@@ -61,6 +61,7 @@
             PlayerProjectile proj = projPool.GetProjectile();
 
             proj.transform.position = shootingPoint.position;
+            proj.Rb.velocity = Vector2.zero;
             proj.Rb.AddForce(shootDirection * shootingForce);
 
             isLoaded = false;

@@ -15,10 +15,7 @@
         protected float playerPosUpdateRate = 1f;
 
         [SerializeField]
-        protected float attackingDistance = 12f;
-
-        [SerializeField]
-        protected float aggroRange = 25f;
+        protected float visionRange = 30f;
 
         [SerializeField]
         protected float rotationSpeed = 3f;
@@ -27,15 +24,10 @@
         protected LayerMask wallsLayer = default;
 
         [SerializeField]
-        protected ChasingEnemyBehaviour chasingBehaviour = default;
-        [SerializeField]
-        protected PatrolEnemyBehaviour patrolBehaviour = default;
-        [SerializeField]
-        protected AttackEnemyBehaviour attackBehaviour = default;
+        protected BaseEnemyBehaviour startBehaviour = default;
 
         protected BaseEnemyBehaviour currentBehaviour = default;
 
-        protected Rigidbody2D rb = default;
         protected NavMeshAgent agent = default;
         protected PlayerMovementController player = default;
         protected Coroutine checkPlayerPositionRoutine = default;
@@ -48,20 +40,15 @@
         protected virtual void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
-            rb = GetComponent<Rigidbody2D>();
             agent.updateRotation = false;
             agent.updateUpAxis = false;
 
             player = FindAnyObjectByType<PlayerMovementController>();
-
-            patrolBehaviour.Init();
-            chasingBehaviour.Init(this, player.transform);
-            attackBehaviour.Init();
         }
 
         protected virtual void OnEnable()
         {
-            currentBehaviour = chasingBehaviour;
+            currentBehaviour = startBehaviour;
             checkPlayerPositionRoutine = StartCoroutine(CheckPlayerPositionRoutine());
         }
 
@@ -74,16 +61,20 @@
             }
         }
 
-        protected virtual void Update()
-        {
-            Rotate(target);
-        }
+        protected virtual void Update() => RotateTank(target);
+
+        /// <summary>
+        /// Меняет поведение врага
+        /// </summary>
+        /// <param name="behaviour"></param>
+        public virtual void SetCurrentBehaviour(BaseEnemyBehaviour behaviour) => 
+            currentBehaviour = behaviour;
 
         protected virtual IEnumerator CheckPlayerPositionRoutine()
         {
             while (isActiveAndEnabled)
             {
-                distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+                /*distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
                 if (distanceToPlayer > aggroRange)
                 {
@@ -97,8 +88,9 @@
                 if (distanceToPlayer <= attackingDistance && PlayerIsVisible())
                 {
                     currentBehaviour = attackBehaviour;
-                }
+                }*/
 
+                Debug.Log(currentBehaviour);
                 currentBehaviour.OnUpdate();
 
                 yield return new WaitForSeconds(playerPosUpdateRate);
@@ -121,7 +113,7 @@
         /// <returns></returns>
         public virtual bool PlayerIsVisible()
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > aggroRange)
+            if (Vector3.Distance(transform.position, player.transform.position) > visionRange)
             {
                 return false;
             }
@@ -136,13 +128,16 @@
             return true;
         }
 
-        protected virtual void Rotate(Vector3 target)
+        protected virtual void RotateTank(Vector3 target)
         {
             direction = new Vector2(-agent.velocity.x, agent.velocity.y).normalized;
 
             angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
 
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
