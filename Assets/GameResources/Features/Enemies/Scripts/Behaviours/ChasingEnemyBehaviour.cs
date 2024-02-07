@@ -8,17 +8,6 @@ namespace Tanks.Features.Enemies
     [CreateAssetMenu(menuName = "Enemies/Behaviours/Chasing", fileName = "Chasing Enemy Behaviour")]
     public class ChasingEnemyBehaviour : BaseEnemyBehaviour
     {
-        [SerializeField]
-        protected PatrolEnemyBehaviour patrolBehaviour = default;
-        [SerializeField]
-        protected AttackEnemyBehaviour attackBehaviour = default;
-
-        [SerializeField, Header("Дистанция, на которой враг возвращается к патрулированию")]
-        protected float patrolRange = 30f;
-
-        [SerializeField, Header("Дистанция, на которой враг переходит в атаку")]
-        protected float attackRange = 12f;
-
         protected EnemyBehaviourController controller = default;
         protected Transform target = default;
 
@@ -33,25 +22,11 @@ namespace Tanks.Features.Enemies
         public virtual void Init(EnemyBehaviourController controller, Transform player)
         {
             this.controller = controller;
-            this.target = player;
+            target = player;
         }
 
         public override void OnUpdate()
         {
-            /*distanceToTarget = Vector3.Distance(controller.transform.position, target.position);
-
-            if (distanceToTarget >= patrolRange)
-            {
-                controller.SetCurrentBehaviour(patrolBehaviour);
-                return;
-            }
-
-            if (distanceToTarget <= attackRange && controller.PlayerIsVisible())
-            {
-                controller.SetCurrentBehaviour(attackBehaviour);
-                return;
-            }*/
-
             if (controller.PlayerIsVisible)
             {
                 lastPlayerPos = target.position;

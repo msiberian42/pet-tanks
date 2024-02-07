@@ -30,6 +30,11 @@
         [SerializeField]
         protected AttackEnemyBehaviour attackBehaviour = default;
 
+        [SerializeField]
+        protected Transform turret = default;
+        [SerializeField]
+        protected Transform shootingPoint = default;
+
         protected PatrolEnemyBehaviour patrolBehaviourInstance = default;
         protected ChasingEnemyBehaviour chasingBehaviourInstance = default;
         protected AttackEnemyBehaviour attackBehaviourInstance = default;
@@ -49,7 +54,7 @@
 
             patrolBehaviourInstance.Init(controller, player.transform);
             chasingBehaviourInstance.Init(controller, player.transform);
-            attackBehaviourInstance.Init();
+            attackBehaviourInstance.Init(controller, this, player.transform, turret, shootingPoint);
         }
 
         protected virtual void OnEnable() => SetPatrolBehaviour();
