@@ -29,7 +29,7 @@
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected bool isLoaded = true;
-        protected BaseProjectile proj = default;
+        protected PlayerProjectile proj = default;
 
         protected virtual void Awake() => 
             projPool = FindAnyObjectByType<PlayerProjectilePool>();
@@ -59,11 +59,11 @@
 
             shootDirection.Normalize();
 
-            proj = projPool.GetProjectile();
+            proj = (PlayerProjectile)projPool.GetProjectile();
 
             proj.transform.position = shootingPoint.position;
-            proj.Rb.velocity = Vector2.zero;
-            proj.Rb.AddForce(shootDirection * shootingForce);
+            proj.transform.rotation = turret.transform.rotation;
+            proj.SetSpeed(shootingForce);
 
             isLoaded = false;
             StartCoroutine(LoadingRoutine());

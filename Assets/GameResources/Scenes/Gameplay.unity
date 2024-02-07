@@ -2446,7 +2446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 1869242435}
   shootingPoint: {fileID: 232405210}
-  shootingForce: 600
+  shootingForce: 10
   reloadCooldown: 1
 --- !u!114 &1833310807
 MonoBehaviour:
