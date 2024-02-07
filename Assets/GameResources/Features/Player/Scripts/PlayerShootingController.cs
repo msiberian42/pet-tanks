@@ -19,7 +19,9 @@
         [SerializeField]
         protected Transform shootingPoint = default;
         [SerializeField]
-        protected float shootingForce = 10f;
+        protected float projectileSpeed = 10f;
+        [SerializeField]
+        protected float projectileDamage = 35f;
         [SerializeField]
         protected float reloadCooldown = 1f;
 
@@ -29,7 +31,7 @@
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected bool isLoaded = true;
-        protected BaseProjectile proj = default;
+        protected PlayerProjectile proj = default;
 
         protected virtual void Awake() => 
             projPool = FindAnyObjectByType<PlayerProjectilePool>();
@@ -59,11 +61,12 @@
 
             shootDirection.Normalize();
 
-            proj = projPool.GetProjectile();
+            proj = (PlayerProjectile)projPool.GetObject();
 
             proj.transform.position = shootingPoint.position;
-            proj.Rb.velocity = Vector2.zero;
-            proj.Rb.AddForce(shootDirection * shootingForce);
+            proj.transform.rotation = turret.transform.rotation;
+            proj.SetSpeed(projectileSpeed);
+            proj.SetDamage(projectileDamage);
 
             isLoaded = false;
             StartCoroutine(LoadingRoutine());

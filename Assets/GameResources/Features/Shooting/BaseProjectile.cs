@@ -14,6 +14,7 @@
 
         protected BasePool pool = default;
         protected Coroutine lifetimeRoutine = default;
+        protected const int WALLS_LAYER = 6;
 
         /// <summary>
         /// RB снаряда
@@ -42,7 +43,7 @@
         {
             yield return new WaitForSeconds(lifetime);
 
-            pool.ReleaseProjectile(this);
+            pool.ReleaseObject(this);
         }
     }
 }
