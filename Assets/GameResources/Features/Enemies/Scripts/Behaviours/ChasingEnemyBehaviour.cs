@@ -25,6 +25,10 @@ namespace Tanks.Features.Enemies
             target = player;
         }
 
+        public override void OnStateEnter() => controller.Agent.isStopped = false;
+
+        public override void OnStateExit() { }
+
         public override void OnUpdate()
         {
             if (controller.PlayerIsVisible)

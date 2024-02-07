@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a19b63be2ad43984fa0f7ba8b065ecec, type: 3}
   m_Name: Attack Enemy Behaviour
   m_EditorClassIdentifier: 
+  reloadCooldown: 1.5
+  shootingForce: 500

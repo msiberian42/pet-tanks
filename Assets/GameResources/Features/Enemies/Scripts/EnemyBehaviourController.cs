@@ -19,7 +19,17 @@
         /// <summary>
         /// Игрок в зоне видимости врага
         /// </summary>
-        public bool PlayerIsVisible {  get; protected set; }
+        public bool PlayerIsVisible {  get; protected set; } = false;
+
+        /// <summary>
+        /// Готов к стрельбе
+        /// </summary>
+        public bool IsLoaded {  get; protected set; } = true;
+
+        /// <summary>
+        /// Nav Mesh Agent
+        /// </summary>
+        public NavMeshAgent Agent { get; protected set; } = default;
 
         [SerializeField, Header("Частота обновления информации о позиции игрока")]
         protected float playerPosUpdateRate = 0.5f;
@@ -34,10 +44,9 @@
         protected LayerMask wallsLayer = default;
 
         protected BaseEnemyBehaviour currentBehaviour = default;
-
-        protected NavMeshAgent agent = default;
         protected PlayerMovementController player = default;
         protected Coroutine checkPlayerRoutine = default;
+        protected float reloadCooldown = 1f;
 
         protected Vector3 direction = default;
         protected float angle = 0f;
@@ -46,9 +55,9 @@
 
         protected virtual void Awake()
         {
-            agent = GetComponent<NavMeshAgent>();
-            agent.updateRotation = false;
-            agent.updateUpAxis = false;
+            Agent = GetComponent<NavMeshAgent>();
+            Agent.updateRotation = false;
+            Agent.updateUpAxis = false;
 
             player = FindAnyObjectByType<PlayerMovementController>();
         }
@@ -56,6 +65,7 @@
         protected virtual void OnEnable()
         {
             checkPlayerRoutine = StartCoroutine(CheckPlayerRoutine());
+            IsLoaded = true;
         }
 
         protected virtual void OnDisable()
@@ -70,8 +80,6 @@
         protected virtual void Update()
         {
             RotateTank(target);
-
-            Debug.Log(currentBehaviour);
             currentBehaviour.OnUpdate();
         }
 
@@ -79,17 +87,11 @@
         /// Меняет поведение врага
         /// </summary>
         /// <param name="behaviour"></param>
-        public virtual void SetCurrentBehaviour(BaseEnemyBehaviour behaviour) => 
-            currentBehaviour = behaviour;
-
-        protected virtual IEnumerator CheckPlayerRoutine()
+        public virtual void SetCurrentBehaviour(BaseEnemyBehaviour behaviour)
         {
-            while (isActiveAndEnabled)
-            {
-                PlayerIsVisible = CheckPlayerVisible();
-
-                yield return new WaitForSeconds(playerPosUpdateRate);
-            }
+            currentBehaviour?.OnStateExit();
+            currentBehaviour = behaviour;
+            currentBehaviour.OnStateEnter();
         }
 
         /// <summary>
@@ -99,7 +101,29 @@
         public virtual void Move(Vector3 target)
         {
             this.target = target;
-            agent.SetDestination(target);
+            Agent.SetDestination(target);
+        }
+
+        protected virtual void RotateTank(Vector3 target)
+        {
+            direction = new Vector2(-Agent.velocity.x, Agent.velocity.y).normalized;
+
+            angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+
+            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+            transform.rotation = Quaternion.RotateTowards(
+                transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        protected virtual IEnumerator CheckPlayerRoutine()
+        {
+            while (isActiveAndEnabled)
+            {
+                PlayerIsVisible = CheckPlayerVisible();
+
+                yield return new WaitForSeconds(playerPosUpdateRate);
+            }
         }
 
         protected virtual bool CheckPlayerVisible()
@@ -119,16 +143,24 @@
             return true;
         }
 
-        protected virtual void RotateTank(Vector3 target)
+        /// <summary>
+        /// Задает время перезарядки
+        /// </summary>
+        /// <param name="cooldown"></param>
+        public virtual void SetReloadingCooldown(float cooldown) => reloadCooldown = cooldown;
+
+        /// <summary>
+        /// Начинает перезарядку
+        /// </summary>
+        public virtual void StartReloading() => StartCoroutine(LoadingRoutine());
+
+        protected virtual IEnumerator LoadingRoutine()
         {
-            direction = new Vector2(-agent.velocity.x, agent.velocity.y).normalized;
+            IsLoaded = false;
 
-            angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            yield return new WaitForSeconds(reloadCooldown);
 
-            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            IsLoaded = true;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace Tanks.Features.Enemies
 {
     using Tanks.Features.Player;
+    using Tanks.Features.Shooting;
     using UnityEngine;
 
     /// <summary>
@@ -43,10 +44,12 @@
         protected EnemyBehaviourController controller = default;
 
         protected PlayerMovementController player = default;
+        protected EnemyProjectilePool projectilePool = default;
 
         protected virtual void Awake()
         {
             player = FindAnyObjectByType<PlayerMovementController>();
+            projectilePool = FindAnyObjectByType<EnemyProjectilePool>();
 
             patrolBehaviourInstance = Instantiate(patrolBehaviour);
             chasingBehaviourInstance = Instantiate(chasingBehaviour);
@@ -54,7 +57,8 @@
 
             patrolBehaviourInstance.Init(controller, player.transform);
             chasingBehaviourInstance.Init(controller, player.transform);
-            attackBehaviourInstance.Init(controller, this, player.transform, turret, shootingPoint);
+            attackBehaviourInstance.Init(controller: controller, initializer: this, projectilePool: projectilePool,
+                target: player.transform, turret: turret, shootingPoint: shootingPoint);
         }
 
         protected virtual void OnEnable() => SetPatrolBehaviour();

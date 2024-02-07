@@ -23,6 +23,10 @@
             this.target = target;
         }
 
+        public override void OnStateEnter() => controller.Agent.isStopped = false;
+
+        public override void OnStateExit() { }
+
         public override void OnUpdate()
         {
             controller.Move(controller.transform.position);
