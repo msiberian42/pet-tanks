@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Enemies
 {
+    using System;
     using UnityEngine;
 
     /// <summary>
@@ -14,6 +15,11 @@
         public float MaxHealth => maxHealth;
 
         /// <summary>
+        /// Количество здоровья изменено
+        /// </summary>
+        public event Action OnHealthValueChangedEvent = delegate { };
+
+        /// <summary>
         /// Текущее значение здоровья
         /// </summary>
         public float CurrentHealthValue
@@ -22,6 +28,7 @@
             protected set
             {
                 currentHealthValue = Mathf.Clamp(value, 0, MaxHealth);
+                OnHealthValueChangedEvent();
             }
         }
 

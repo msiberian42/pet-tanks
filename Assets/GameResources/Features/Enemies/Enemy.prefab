@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 4076298952979712855}
   - component: {fileID: 2763795042450585013}
   - component: {fileID: 6381315889769968248}
+  - component: {fileID: 2704736255263635668}
   - component: {fileID: 6875178775181416092}
   - component: {fileID: 7304801814914034077}
   - component: {fileID: 3260383901991128180}
@@ -454,6 +455,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+--- !u!114 &2704736255263635668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8252167185333801107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47270b177fec6a4e9721f10a78992da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 6381315889769968248}
+  canvasPrefab: {fileID: 5385968700751673876, guid: a1695a840e2b7ad4e891534257ddf75f, type: 3}
 --- !u!50 &6875178775181416092
 Rigidbody2D:
   serializedVersion: 4
