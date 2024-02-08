@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Enemies
 {
+    using System;
     using Tanks.Features.Shooting;
     using UnityEngine;
 
@@ -9,6 +10,11 @@
     [CreateAssetMenu(menuName = "Enemies/Behaviours/Attack", fileName = "Attack Enemy Behaviour")]
     public class AttackEnemyBehaviour : BaseEnemyBehaviour
     {
+        /// <summary>
+        /// Выстрел совершен
+        /// </summary>
+        public event Action onShootEvent = delegate { };
+
         [SerializeField]
         protected float reloadCooldown = 1f;
 
@@ -90,6 +96,7 @@
             projectile.SetSpeed(projectileSpeed);
             projectile.SetDamage(projectileDamage);
 
+            onShootEvent();
             controller.StartReloading();
         }
     }
