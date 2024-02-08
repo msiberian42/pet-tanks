@@ -1,10 +1,10 @@
-namespace Tanks.Features.UI
+п»їnamespace Tanks.Features.UI
 {
     using UnityEngine;
     using UnityEngine.UI;
 
     /// <summary>
-    /// Кастомное отображение курсора
+    /// РљР°СЃС‚РѕРјРЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РєСѓСЂСЃРѕСЂР°
     /// </summary>
     public class CursorView : MonoBehaviour
     {
