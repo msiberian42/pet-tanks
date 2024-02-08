@@ -10,9 +10,13 @@
     {
         [SerializeField]
         protected EnemyBehaviourInitializer enemyBehaviourInitializer = default;
+        [SerializeField]
+        protected EnemyHealthController enemyHealthController = default;
 
         [SerializeField]
         protected AudioSource shootSound = default;
+        [SerializeField]
+        protected AudioSource damageSound = default;
 
         protected AttackEnemyBehaviour attackEnemyBehaviour = default;
 
@@ -23,17 +27,25 @@
         {
             attackEnemyBehaviour = enemyBehaviourInitializer.AttackBehaviourInstance;
             attackEnemyBehaviour.onShootEvent += PlayShootSound;
+            enemyHealthController.onDamageReceivedEvent += PlayDamageSound;
         }
 
         protected virtual void OnDestroy()
         {
             attackEnemyBehaviour.onShootEvent -= PlayShootSound;
+            enemyHealthController.onDamageReceivedEvent -= PlayDamageSound;
         }
 
         protected virtual void PlayShootSound()
         {
             shootSound.pitch = Random.Range(minPitch, maxPitch);
             shootSound.Play();
+        }
+
+        protected virtual void PlayDamageSound()
+        {
+            damageSound.pitch = Random.Range(minPitch, maxPitch);
+            damageSound.Play();
         }
     }
 }

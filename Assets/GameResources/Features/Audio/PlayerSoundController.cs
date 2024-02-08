@@ -10,11 +10,15 @@
     {
         [SerializeField]
         protected PlayerShootingController shootingController = default;
+        [SerializeField]
+        protected PlayerHealthController healthController = default;
 
         [SerializeField]
         protected AudioSource shootSound = default;
         [SerializeField]
         protected AudioSource reloadSound = default;
+        [SerializeField]
+        protected AudioSource damageSound = default;
 
         protected float minPitch = 0.95f;
         protected float maxPitch = 1.05f;
@@ -23,12 +27,14 @@
         {
             shootingController.onShootEvent += PlayShootSound;
             shootingController.onReloadingFinishedEvent += PlayReloadSound;
+            healthController.onDamageReceivedEvent += PlayDamageSound;
         }
 
         protected virtual void OnDestroy()
         {
             shootingController.onShootEvent -= PlayShootSound;
             shootingController.onReloadingFinishedEvent -= PlayReloadSound;
+            healthController.onDamageReceivedEvent -= PlayDamageSound;
         }
 
         protected virtual void PlayShootSound()
@@ -41,6 +47,12 @@
         {
             reloadSound.pitch = Random.Range(minPitch, maxPitch);
             reloadSound.Play();
+        }
+
+        protected virtual void PlayDamageSound()
+        {
+            damageSound.pitch = Random.Range(minPitch, maxPitch);
+            damageSound.Play();
         }
     }
 }
