@@ -1,11 +1,11 @@
-namespace Tanks.Features.UI
+п»їnamespace Tanks.Features.UI
 {
     using UnityEngine;
     using UnityEngine.UI;
     using Tanks.Features.Player;
 
     /// <summary>
-    /// Отображение перезарядки основного оружия игрока
+    /// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РїРµСЂРµР·Р°СЂСЏРґРєРё РѕСЃРЅРѕРІРЅРѕРіРѕ РѕСЂСѓР¶РёСЏ РёРіСЂРѕРєР°
     /// </summary>
     public class PlayerReloadView : MonoBehaviour
     {
