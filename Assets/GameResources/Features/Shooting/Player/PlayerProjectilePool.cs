@@ -21,7 +21,7 @@
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
                 actionOnDestroy: (obj) => Destroy(obj.gameObject),
-                collectionCheck: true,
+                collectionCheck: false,
                 defaultCapacity: 10,
                 maxSize: 100);
         }

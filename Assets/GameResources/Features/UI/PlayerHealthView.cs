@@ -18,11 +18,11 @@
         {
             controller = FindAnyObjectByType<PlayerHealthController>();
             view.fillAmount = 1;
-            controller.OnHealthValueChangedEvent += OnHealthValueChanged;
+            controller.onHealthValueChangedEvent += OnHealthValueChanged;
         }
 
         protected virtual void OnDestroy() => 
-            controller.OnHealthValueChangedEvent -= OnHealthValueChanged;
+            controller.onHealthValueChangedEvent -= OnHealthValueChanged;
 
         protected virtual void OnHealthValueChanged() => 
             view.fillAmount = controller.CurrentHealthValue / controller.MaxHealth;

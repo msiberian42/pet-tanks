@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Attack Enemy Behaviour
   m_EditorClassIdentifier: 
   reloadCooldown: 1.5
-  shootingForce: 10
+  projectileSpeed: 10
+  projectileDamage: 20

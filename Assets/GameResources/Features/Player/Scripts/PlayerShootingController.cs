@@ -26,6 +26,11 @@
         public event Action onReloadingFinishedEvent = delegate { };
 
         /// <summary>
+        /// Выстрел совершен
+        /// </summary>
+        public event Action onShootEvent = delegate { };
+
+        /// <summary>
         /// Время перезарядки
         /// </summary>
         public float ReloadCooldown => reloadCooldown;
@@ -84,6 +89,7 @@
             proj.SetSpeed(projectileSpeed);
             proj.SetDamage(projectileDamage);
 
+            onShootEvent();
             isLoaded = false;
             StartCoroutine(LoadingRoutine());
         }

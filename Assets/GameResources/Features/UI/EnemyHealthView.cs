@@ -20,7 +20,7 @@
         protected virtual void Awake() => view.fillAmount = 1;
 
         protected virtual void OnDestroy() =>
-            controller.OnHealthValueChangedEvent -= OnHealthValueChanged;
+            controller.onHealthValueChangedEvent -= OnHealthValueChanged;
        
         protected virtual void OnEnable() => healthBar.SetActive(false);
 
@@ -29,7 +29,7 @@
         public virtual void SetHealthController(EnemyHealthController controller)
         {
             this.controller = controller;
-            controller.OnHealthValueChangedEvent += OnHealthValueChanged;
+            controller.onHealthValueChangedEvent += OnHealthValueChanged;
         }
 
         protected virtual void OnHealthValueChanged()
