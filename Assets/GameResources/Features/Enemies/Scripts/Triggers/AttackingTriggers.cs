@@ -45,7 +45,7 @@
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject == _player.gameObject)
+            if (_player != null && collision.gameObject == _player.gameObject)
             {
                 _initializer.SetChasingBehaviour();
             }

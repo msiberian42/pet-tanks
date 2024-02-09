@@ -7,7 +7,7 @@
     /// <summary>
     /// Пул снарядов врага
     /// </summary>
-    public class EnemyProjectilePool : BasePool
+    public class EnemyProjectilePool : BaseProjectilePool
     {
         [SerializeField]
         protected EnemyProjectile prefab = default;

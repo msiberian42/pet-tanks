@@ -12,7 +12,7 @@
         [SerializeField]
         protected float lifetime = 6f;
 
-        protected BasePool pool = default;
+        protected BaseProjectilePool pool = default;
         protected Coroutine lifetimeRoutine = default;
         protected const int WALLS_LAYER = 6;
 
