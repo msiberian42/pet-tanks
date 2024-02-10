@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.UI
 {
+    using System;
     using UnityEngine;
     using Tanks.Features.Player;
 
@@ -8,6 +9,11 @@
     /// </summary>
     public class GameOverController : MonoBehaviour
     {
+        /// <summary>
+        /// Игрок проиграл
+        /// </summary>
+        public event Action onGameOverEvent = delegate { };
+
         [SerializeField]
         protected GameObject gameOverScreen = default;
 
