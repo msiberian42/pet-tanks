@@ -11,16 +11,35 @@
         [SerializeField]
         protected Image cursorSprite = default;
 
-        protected virtual void OnEnable()
+        protected PauseController pauseController = default;
+
+        protected virtual void Awake()
+        {
+            pauseController = FindAnyObjectByType<PauseController>();
+            pauseController.onPauseEnabled += DisableCustomCursor;
+            pauseController.onPauseDisabled += EnableCustomCursor;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            pauseController.onPauseEnabled -= DisableCustomCursor;
+            pauseController.onPauseDisabled -= EnableCustomCursor;
+        }
+
+        protected virtual void OnEnable() => EnableCustomCursor();
+
+        protected virtual void Update() => 
+            cursorSprite.transform.position = Input.mousePosition;
+
+        protected virtual void OnDisable() => DisableCustomCursor();
+
+        protected virtual void EnableCustomCursor()
         {
             Cursor.visible = false;
             cursorSprite.enabled = true;
         }
 
-        protected virtual void Update() => 
-            cursorSprite.transform.position = Input.mousePosition;
-
-        protected virtual void OnDisable()
+        protected virtual void DisableCustomCursor()
         {
             Cursor.visible = true;
             cursorSprite.enabled = false;
