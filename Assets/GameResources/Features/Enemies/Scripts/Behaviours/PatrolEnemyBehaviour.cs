@@ -10,7 +10,6 @@
     public class PatrolEnemyBehaviour : BaseEnemyBehaviour
     {
         protected EnemyBehaviourController controller = default;
-        protected Transform target = default;
         protected List<Transform> patrolPoints = new List<Transform>();
 
         protected float distanceToTarget = 0f;
@@ -22,11 +21,9 @@
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="target"></param>
-        public virtual void Init(EnemyBehaviourController controller, Transform target,
-            List<Transform> patrolPoints = null)
+        public virtual void Init(EnemyBehaviourController controller, List<Transform> patrolPoints = null)
         {
             this.controller = controller;
-            this.target = target;
             this.patrolPoints = patrolPoints;
         }
 

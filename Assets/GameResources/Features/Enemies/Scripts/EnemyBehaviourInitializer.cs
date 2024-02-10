@@ -55,10 +55,14 @@
             chasingBehaviourInstance = Instantiate(chasingBehaviour);
             attackBehaviourInstance = Instantiate(attackBehaviour);
 
-            patrolBehaviourInstance.Init(controller, player.transform);
-            chasingBehaviourInstance.Init(controller, player.transform);
-            attackBehaviourInstance.Init(controller: controller, initializer: this, projectilePool: projectilePool,
-                target: player.transform, turret: turret, shootingPoint: shootingPoint);
+            patrolBehaviourInstance.Init(controller);
+
+            if (player != null)
+            {
+                chasingBehaviourInstance.Init(controller, player.transform);
+                attackBehaviourInstance.Init(controller: controller, initializer: this, projectilePool: projectilePool,
+                    target: player.transform, turret: turret, shootingPoint: shootingPoint);
+            }
         }
 
         protected virtual void OnEnable() => SetPatrolBehaviour();
