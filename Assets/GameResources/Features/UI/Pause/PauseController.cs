@@ -1,6 +1,7 @@
 ﻿namespace Tanks.Features.UI
 {
     using System;
+    using System.Collections.Generic;
     using UnityEngine;
 
     /// <summary>
@@ -21,6 +22,16 @@
         [SerializeField]
         protected GameObject pauseScreen = default;
 
+        [SerializeField]
+        protected List<GameObject> objToEnableOnPause = new List<GameObject>();
+
+        [SerializeField]
+        protected List<GameObject> objToDisableOnPause = new List<GameObject>();
+
+        protected virtual void Awake() => Time.timeScale = 1.0f;
+
+        protected virtual void OnDestroy() => Time.timeScale = 1.0f;
+
         /// <summary>
         /// Ставит игру на паузу
         /// </summary>
@@ -29,6 +40,16 @@
             Time.timeScale = 0f;
             pauseScreen.SetActive(true);
             onPauseEnabled();
+
+            foreach (var obj in objToEnableOnPause)
+            {
+                obj.SetActive(true);
+            }
+
+            foreach (var obj in objToDisableOnPause)
+            {
+                obj.SetActive(false);
+            }
         }
 
         /// <summary>
