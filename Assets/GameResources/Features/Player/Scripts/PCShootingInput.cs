@@ -18,6 +18,11 @@
 
         protected virtual void Update()
         {
+            if (Time.timeScale == 0f)
+            {
+                return;
+            }
+
             mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
             controller.RotateTurret(mousePos);
