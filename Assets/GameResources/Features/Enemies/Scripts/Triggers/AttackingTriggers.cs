@@ -27,7 +27,7 @@
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject == _player.gameObject && _controller.PlayerIsVisible)
+            if (_player != null && collision.gameObject == _player.gameObject && _controller.PlayerIsVisible)
             {
                 _initializer.SetAttackBehaviour();
             }
@@ -35,7 +35,7 @@
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject == _player.gameObject
+            if (_player != null && collision.gameObject == _player.gameObject
                 && _controller.CurrentBehaviour == _initializer.ChasingBehaviourInstance
                 && _controller.PlayerIsVisible)
             {

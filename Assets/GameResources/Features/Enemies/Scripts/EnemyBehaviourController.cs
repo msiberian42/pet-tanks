@@ -123,7 +123,7 @@
 
         protected virtual bool CheckPlayerVisible()
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > visionRange)
+            if (player == null || Vector3.Distance(transform.position, player.transform.position) > visionRange)
             {
                 return false;
             }
