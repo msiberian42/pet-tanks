@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Player
 {
+    using System;
     using Tanks.Features.Explosion;
     using Tanks.Features.Shooting;
 
@@ -8,6 +9,11 @@
     /// </summary>
     public class PlayerHealthController : BaseHealthController
     {
+        /// <summary>
+        /// У игрока кончилось здоровье
+        /// </summary>
+        public event Action onPlayerDeathEvent = delegate { };
+
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
 
@@ -39,6 +45,7 @@
             explosionController.SetExplosionDamage(0);
             explosionController.transform.position = transform.position;
 
+            onPlayerDeathEvent();
             gameObject.SetActive(false);
         }
     }

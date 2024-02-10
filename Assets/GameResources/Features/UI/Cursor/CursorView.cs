@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
+    using Tanks.Features.Player;
 
     /// <summary>
     /// Кастомное отображение курсора
@@ -12,18 +13,23 @@
         protected Image cursorSprite = default;
 
         protected PauseController pauseController = default;
+        protected PlayerHealthController playerHealthController = default;
 
         protected virtual void Awake()
         {
             pauseController = FindAnyObjectByType<PauseController>();
             pauseController.onPauseEnabled += DisableCustomCursor;
             pauseController.onPauseDisabled += EnableCustomCursor;
+
+            playerHealthController = FindAnyObjectByType<PlayerHealthController>();
+            playerHealthController.onPlayerDeathEvent += DisableCustomCursor;
         }
 
         protected virtual void OnDestroy()
         {
             pauseController.onPauseEnabled -= DisableCustomCursor;
             pauseController.onPauseDisabled -= EnableCustomCursor;
+            playerHealthController.onPlayerDeathEvent -= DisableCustomCursor;
         }
 
         protected virtual void OnEnable() => EnableCustomCursor();
