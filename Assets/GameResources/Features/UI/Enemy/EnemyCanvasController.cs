@@ -24,9 +24,9 @@
 
         protected virtual void OnDestroy() => Destroy(healthCanvas);
 
-        protected virtual void OnEnable() => healthCanvas.gameObject.SetActive(true);
+        protected virtual void OnEnable() => healthCanvas?.gameObject.SetActive(true);
 
-        protected virtual void OnDisable() => healthCanvas.gameObject.SetActive(false);
+        protected virtual void OnDisable() => healthCanvas?.gameObject.SetActive(false);
 
         protected virtual void Update() => 
             healthCanvas.transform.position = controller.transform.position;
