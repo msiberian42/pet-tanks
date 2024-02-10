@@ -1,6 +1,5 @@
 ﻿namespace Tanks.Features.Victory
 {
-    using System.Collections;
     using UnityEngine;
     using Tanks.Features.Enemies;
 
