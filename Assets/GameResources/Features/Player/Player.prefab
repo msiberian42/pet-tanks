@@ -793,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathPrefab: {fileID: 4800736376637877208, guid: f56d2f91b4855b446aee98a3b0802958, type: 3}
 --- !u!50 &4295348515643032569
 Rigidbody2D:
   serializedVersion: 4

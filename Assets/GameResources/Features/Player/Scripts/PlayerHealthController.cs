@@ -3,6 +3,7 @@
     using System;
     using Tanks.Features.Explosion;
     using Tanks.Features.Shooting;
+    using UnityEngine;
 
     /// <summary>
     /// Контроллер здоровья игрока
@@ -13,6 +14,9 @@
         /// У игрока кончилось здоровье
         /// </summary>
         public event Action onPlayerDeathEvent = delegate { };
+
+        [SerializeField]
+        protected GameObject deathPrefab = default;
 
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
@@ -46,6 +50,9 @@
             explosionController.transform.position = transform.position;
 
             onPlayerDeathEvent();
+
+            Instantiate(deathPrefab, transform.position, transform.rotation);
+
             gameObject.SetActive(false);
         }
     }
