@@ -1,7 +1,8 @@
 ﻿namespace Tanks.Features.Player
 {
     using UnityEngine;
-    using static UnityEngine.GraphicsBuffer;
+    using Tanks.Features.UI;
+    using Tanks.Features.Victory;
 
     /// <summary>
     /// Обработчик инпута стрельбы с ПК
@@ -13,8 +14,23 @@
 
         protected Camera cam = default;
         protected Vector3 mousePos = default;
+        protected GameOverController gameOverController = default;
 
-        protected virtual void Awake() => cam = Camera.main;
+        protected virtual void Start()
+        {
+            cam = Camera.main;
+
+            gameOverController = FindAnyObjectByType<GameOverController>();
+            gameOverController.onGameOverEvent += DisableShooting;
+
+            VictoryController.onVictoryEvent += DisableShooting;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            gameOverController.onGameOverEvent -= DisableShooting;
+            VictoryController.onVictoryEvent -= DisableShooting;
+        }
 
         protected virtual void Update()
         {
@@ -32,5 +48,7 @@
                 controller.Shoot(mousePos);
             }
         }
+
+        protected virtual void DisableShooting() => this.enabled = false;
     }
 }

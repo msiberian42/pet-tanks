@@ -1,6 +1,6 @@
 ﻿namespace Tanks.Features.Enemies
 {
-    using UnityEngine;
+    using System;
     using Tanks.Features.Shooting;
     using Tanks.Features.Explosion;
 
@@ -9,6 +9,11 @@
     /// </summary>
     public class EnemyHealthController : BaseHealthController
     {
+        /// <summary>
+        /// Враг уничтожен
+        /// </summary>
+        public static event Action<EnemyHealthController> onEnemyDeathEvent = delegate { };
+
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
 
@@ -39,6 +44,8 @@
             explosionController = explosionsPool.GetObject();
             explosionController.SetExplosionDamage(0);
             explosionController.transform.position = transform.position;
+
+            onEnemyDeathEvent(this);
 
             gameObject.SetActive(false);
         }
