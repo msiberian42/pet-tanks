@@ -50,7 +50,13 @@
             controller.SetReloadingCooldown(reloadCooldown);
         }
 
-        public override void OnStateEnter() => controller.Agent.isStopped = true;
+        public override void OnStateEnter()
+        {
+            if (controller.Agent != null && controller.Agent.isActiveAndEnabled)
+            {
+                controller.Agent.isStopped = true;
+            }   
+        }
 
         public override void OnStateExit() => controller.Agent.isStopped = false;
 

@@ -4,9 +4,9 @@
     using UnityEngine;
 
     /// <summary>
-    /// Базовый менеджер пула объектов
+    /// Базовый менеджер пула снарядов
     /// </summary>
-    public abstract class BasePool : MonoBehaviour
+    public abstract class BaseProjectilePool : MonoBehaviour
     {
         /// <summary>
         /// Возвращает врага из пула

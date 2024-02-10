@@ -1,23 +1,22 @@
-﻿namespace Tanks.Features.Shooting
+﻿namespace Tanks.Features.Explosion
 {
     using UnityEngine;
     using UnityEngine.Pool;
-    using Tanks.Features.Pool;
 
     /// <summary>
-    /// Пул снарядов игрока
+    /// Пул взрывов
     /// </summary>
-    public class PlayerProjectilePool : BaseProjectilePool
+    public class ExplosionsPool : MonoBehaviour
     {
         [SerializeField]
-        protected PlayerProjectile prefab = default;
+        protected ExplosionController explosionPrefab = default;
 
-        protected ObjectPool<BaseProjectile> projPool = default;
+        protected ObjectPool<ExplosionController> projPool = default;
 
         protected virtual void Awake()
         {
-            projPool = new ObjectPool<BaseProjectile>(
-                createFunc: () => Instantiate(prefab, gameObject.transform),
+            projPool = new ObjectPool<ExplosionController>(
+                createFunc: () => Instantiate(explosionPrefab, gameObject.transform),
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
                 actionOnDestroy: (obj) => Destroy(obj.gameObject),
@@ -29,11 +28,11 @@
         /// <summary>
         /// Возвращает снаряд из пула
         /// </summary>
-        public override BaseProjectile GetObject() => projPool.Get();
+        public virtual ExplosionController GetObject() => projPool.Get();
 
         /// <summary>
         /// Возвращает снаряд в пул
         /// </summary>
-        public override void ReleaseObject(BaseProjectile proj) => projPool.Release(proj);
+        public virtual void ReleaseObject(ExplosionController proj) => projPool.Release(proj);
     }
 }

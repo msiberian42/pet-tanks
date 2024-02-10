@@ -62,5 +62,7 @@
                 gameObject.SetActive(false);
             }
         }
+
+        protected virtual void OnDamageReceived() => onDamageReceivedEvent();
     }
 }
