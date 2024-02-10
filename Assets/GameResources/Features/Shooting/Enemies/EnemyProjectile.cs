@@ -13,18 +13,14 @@
         protected float speed = 10f;
         protected float damage = 1f;
 
-        protected override void Awake()
+        protected virtual void Awake()
         {
-            base.Awake();
             pool = FindAnyObjectByType<EnemyProjectilePool>();
             player = FindAnyObjectByType<PlayerHealthController>();
         }
 
 
-        protected virtual void Update()
-        {
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-        }
+        protected virtual void Update() => transform.Translate(Vector2.up * speed * Time.deltaTime);
 
         /// <summary>
         /// Задает скорость снаряда
