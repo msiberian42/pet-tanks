@@ -26,12 +26,12 @@
         }
 
         /// <summary>
-        /// Возвращает снаряд из пула
+        /// Возвращает взрыв из пула
         /// </summary>
         public virtual ExplosionController GetObject() => projPool.Get();
 
         /// <summary>
-        /// Возвращает снаряд в пул
+        /// Возвращает взрыв в пул
         /// </summary>
         public virtual void ReleaseObject(ExplosionController proj) => projPool.Release(proj);
     }
