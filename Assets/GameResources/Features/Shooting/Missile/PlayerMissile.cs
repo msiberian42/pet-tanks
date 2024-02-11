@@ -32,7 +32,7 @@
         protected Vector3 rotateDirection = default;
         protected float angle = 0f;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
             explosionsPool = FindAnyObjectByType<ExplosionsPool>();
             pool = FindAnyObjectByType<PlayerMissilePool>();

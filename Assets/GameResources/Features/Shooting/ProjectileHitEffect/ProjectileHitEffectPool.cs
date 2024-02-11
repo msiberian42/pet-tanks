@@ -2,21 +2,20 @@
 {
     using UnityEngine;
     using UnityEngine.Pool;
-    using Tanks.Features.Pool;
 
     /// <summary>
-    /// Пул ракет
+    /// Пул эффектов снаряда
     /// </summary>
-    public class PlayerMissilePool : BaseProjectilePool
+    public class ProjectileHitEffectPool : MonoBehaviour
     {
         [SerializeField]
-        protected PlayerMissile prefab = default;
+        protected ProjectileHitEffect prefab = default;
 
-        protected ObjectPool<BaseProjectile> projPool = default;
+        protected ObjectPool<ProjectileHitEffect> projPool = default;
 
         protected virtual void Awake()
         {
-            projPool = new ObjectPool<BaseProjectile>(
+            projPool = new ObjectPool<ProjectileHitEffect>(
                 createFunc: () => Instantiate(prefab, gameObject.transform),
                 actionOnGet: (obj) => obj.gameObject.SetActive(true),
                 actionOnRelease: (obj) => obj.gameObject.SetActive(false),
@@ -27,13 +26,13 @@
         }
 
         /// <summary>
-        /// Возвращает ракету из пула
+        /// Возвращает эффект из пула
         /// </summary>
-        public override BaseProjectile GetObject() => projPool.Get();
+        public virtual ProjectileHitEffect GetObject() => projPool.Get();
 
         /// <summary>
-        /// Возвращает ракету в пул
+        /// Возвращает эффект в пул
         /// </summary>
-        public override void ReleaseObject(BaseProjectile proj) => projPool.Release(proj);
+        public virtual void ReleaseObject(ProjectileHitEffect proj) => projPool.Release(proj);
     }
 }

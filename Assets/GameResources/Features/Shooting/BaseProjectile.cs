@@ -13,8 +13,14 @@
         protected float lifetime = 6f;
 
         protected BaseProjectilePool pool = default;
+        protected ProjectileHitEffectPool effectPool = default;
+
         protected Coroutine lifetimeRoutine = default;
+        protected ProjectileHitEffect effect = default;
+
         protected const int WALLS_LAYER = 6;
+
+        protected virtual void Awake() => effectPool = FindAnyObjectByType<ProjectileHitEffectPool>();
 
         protected virtual void OnEnable() =>
             lifetimeRoutine = StartCoroutine(LifetimeRoutine());
@@ -33,6 +39,13 @@
             yield return new WaitForSeconds(lifetime);
 
             pool.ReleaseObject(this);
+        }
+
+        protected virtual void SpawnEffect()
+        {
+            effect = effectPool.GetObject();
+            effect.transform.position = transform.position;
+            effect.transform.rotation = transform.rotation;
         }
     }
 }
