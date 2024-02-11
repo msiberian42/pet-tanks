@@ -2,14 +2,17 @@
 {
     using UnityEngine;
     using Tanks.Features.Explosion;
-    using Tanks.Features.Enemies;
 
     /// <summary>
     /// Ракета, которая автоматически наводится на первого противника в радиусе ее триггера
     /// </summary>
-    [RequireComponent(typeof(Collider2D))]
     public class PlayerMissile : BaseProjectile
     {
+        /// <summary>
+        /// Слой со стенами
+        /// </summary>
+        public int WallsLayer => WALLS_LAYER;
+
         [SerializeField]
         protected float explosionDamage = 70f;
 
@@ -17,16 +20,17 @@
         protected float explosionRadius = 2f;
 
         [SerializeField]
-        protected float missileSpeed = 1f;
+        protected float missileSpeed = 5f;
 
         [SerializeField]
         protected ParticleSystem fireParticles = default;
 
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
-        protected EnemyHealthController enemyHealthController = default;
 
-        protected bool hasTarget = false;
+        protected Transform target = default;
+        protected Vector3 rotateDirection = default;
+        protected float angle = 0f;
 
         protected virtual void Awake()
         {
@@ -37,35 +41,27 @@
         protected override void OnEnable()
         {
             base.OnEnable();
-            hasTarget = false;
+            target = null;
             fireParticles.Play();
         }
 
         protected virtual void Update()
         {
-            if (!hasTarget)
+            if (target == null)
             {
                 transform.Translate(Vector2.up * missileSpeed * Time.deltaTime);
             }
-        }
-
-        protected virtual void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.gameObject.layer == WALLS_LAYER)
+            else
             {
-                Explode();
-                return;
-            }
-
-            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-
-            if (enemyHealthController != null)
-            {
-                Explode();
+                transform.Translate((target.position - transform.position).normalized * missileSpeed * Time.deltaTime, Space.World);
+                Rotate(target.position);
             }
         }
 
-        protected virtual void Explode()
+        /// <summary>
+        /// Взрывает ракету
+        /// </summary>
+        public virtual void Explode()
         {
             fireParticles.Stop();
 
@@ -74,7 +70,25 @@
             explosionController.SetExplosionRadius(explosionRadius);
             explosionController.transform.position = transform.position;
 
+            target = null;
             pool.ReleaseObject(this);
+        }
+
+        /// <summary>
+        /// Задает цель ракете
+        /// </summary>
+        /// <param name="target"></param>
+        public virtual void SetTarget(Transform target) => this.target = target;
+
+        protected virtual void Rotate(Vector3 target)
+        {
+            rotateDirection = target - transform.position;
+
+            rotateDirection.Normalize();
+
+            angle = Mathf.Atan2(rotateDirection.y, rotateDirection.x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         }
     }
 }

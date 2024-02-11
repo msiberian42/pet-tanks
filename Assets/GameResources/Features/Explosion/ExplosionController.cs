@@ -31,7 +31,7 @@
         protected EnemyHealthController enemyHealthController = default;
 
         protected float explosionDamage = 40f;
-        protected float lifetime = 4f;
+        protected float lifetime = 1f;
         protected float minPitch = 0.95f;
         protected float maxPitch = 1.05f;
 
