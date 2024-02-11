@@ -47,6 +47,11 @@
             {
                 controller.Shoot(mousePos);
             }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                controller.LaunchMissile(mousePos);
+            }
         }
 
         protected virtual void DisableShooting() => this.enabled = false;

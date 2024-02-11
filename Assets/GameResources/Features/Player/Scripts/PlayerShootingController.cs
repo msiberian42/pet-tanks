@@ -4,6 +4,7 @@
     using System.Collections;
     using UnityEngine;
     using Tanks.Features.Shooting;
+    using static UnityEngine.GraphicsBuffer;
 
     /// <summary>
     /// Контроллер башни игрока
@@ -47,15 +48,20 @@
         protected float reloadCooldown = 1f;
 
         protected PlayerProjectilePool projPool = default;
+        protected PlayerMissilePool missilePool = default;
 
         protected Vector3 rotateDirection = default;
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected bool isLoaded = true;
         protected PlayerProjectile proj = default;
+        protected PlayerMissile missile = default;
 
-        protected virtual void Awake() => 
+        protected virtual void Awake()
+        {
             projPool = FindAnyObjectByType<PlayerProjectilePool>();
+            missilePool = FindAnyObjectByType<PlayerMissilePool>();
+        }
 
         /// <summary>
         /// Вращает башню
@@ -102,6 +108,22 @@
 
             isLoaded = true;
             onReloadingFinishedEvent();
+        }
+
+        /// <summary>
+        /// Запускает ракету
+        /// </summary>
+        /// <param name="target"></param>
+        public virtual void LaunchMissile(Vector3 target)
+        {
+            shootDirection = target - shootingPoint.transform.position;
+
+            shootDirection.Normalize();
+
+            missile = (PlayerMissile)missilePool.GetObject();
+
+            missile.transform.position = shootingPoint.position;
+            missile.transform.rotation = turret.transform.rotation;
         }
     }
 }

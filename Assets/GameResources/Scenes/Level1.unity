@@ -5858,7 +5858,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685135074}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6122,7 +6122,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 708765012}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10855,7 +10855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1307993199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12735,51 +12735,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2557165147745968058, guid: fdb0630bfbdf54841a69416aa8d49209, type: 3}
   m_PrefabInstance: {fileID: 1496615023}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1501267625
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1501267626}
-  - component: {fileID: 1501267627}
-  m_Layer: 0
-  m_Name: MissilePool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1501267626
+--- !u!4 &1501267626 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+  m_PrefabInstance: {fileID: 3851836651231859704}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501267625}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 929929889}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1501267627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1501267625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea5204374881924f90a685cc6426f80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
 --- !u!1001 &1502853327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13631,7 +13591,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: aa78d39eefc830949b2d65172eed54d3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30265,7 +30225,7 @@ GameObject:
   - component: {fileID: 1755969124}
   - component: {fileID: 1755969123}
   - component: {fileID: 1755969125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31871,7 +31831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1943861625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34429,6 +34389,67 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!1001 &3851836651231859704
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 929929889}
+    m_Modifications:
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3972222608439321645, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236313320316926430, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+      propertyPath: m_Name
+      value: MissilePool
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
 --- !u!1001 &4681114102801659400
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34644,7 +34665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2885630275341113320, guid: 5970527dd9cc9ab40befd5386c1c6074, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2885630275341113320, guid: 5970527dd9cc9ab40befd5386c1c6074, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
