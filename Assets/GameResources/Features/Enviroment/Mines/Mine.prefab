@@ -302,6 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDamage: 80
   explosionRadius: 2
+  explodeDelay: 0.1
 --- !u!58 &369712990812169686
 CircleCollider2D:
   m_ObjectHideFlags: 0

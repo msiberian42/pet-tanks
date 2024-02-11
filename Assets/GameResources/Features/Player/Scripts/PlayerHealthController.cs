@@ -9,7 +9,7 @@
     /// <summary>
     /// Контроллер здоровья игрока
     /// </summary>
-    public class PlayerHealthController : BaseHealthController, IExplodable
+    public class PlayerHealthController : BaseHealthController, IExplodable, IEnemyProjectileTarget
     {
         /// <summary>
         /// У игрока кончилось здоровье
@@ -58,5 +58,7 @@
         }
 
         public void GetExplosionDamage(float damage) => ChangeHealthValue(-damage);
+
+        public void GetProjectileDamage(float damage) => ChangeHealthValue(-damage);
     }
 }

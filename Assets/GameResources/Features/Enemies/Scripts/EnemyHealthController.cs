@@ -9,7 +9,7 @@
     /// <summary>
     /// Контроллер здоровья врага
     /// </summary>
-    public class EnemyHealthController : BaseHealthController, IExplodable
+    public class EnemyHealthController : BaseHealthController, IExplodable, IPlayerProjectileTarget
     {
         /// <summary>
         /// Враг уничтожен
@@ -60,5 +60,7 @@
         }
 
         public void GetExplosionDamage(float damage) => ChangeHealthValue(-damage);
+
+        public void GetProjectileDamage(float damage) => ChangeHealthValue(-damage);
     }
 }

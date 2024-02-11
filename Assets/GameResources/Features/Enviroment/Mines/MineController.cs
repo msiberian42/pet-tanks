@@ -11,7 +11,7 @@
     /// Контроллер мины
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class MineController : MonoBehaviour, IExplodable
+    public class MineController : MonoBehaviour, IExplodable, IPlayerProjectileTarget, IEnemyProjectileTarget
     {
         [SerializeField]
         protected float explosionDamage = 80f;
@@ -83,5 +83,7 @@
                 explodeRoutine = StartCoroutine(ExplodeRoutine());
             }
         }
+
+        public void GetProjectileDamage(float damage) => StartExplode();
     }
 }
