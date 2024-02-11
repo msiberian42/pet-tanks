@@ -2,10 +2,8 @@
 {
     using System.Collections;
     using UnityEngine;
-    using Tanks.Features.Enemies;
-    using Tanks.Features.Player;
-    using Tanks.Features.Explosion;
     using Tanks.Features.Interfaces;
+    using Tanks.Features.Explosion;
 
     /// <summary>
     /// Контроллер мины
@@ -24,8 +22,7 @@
 
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
-        protected PlayerMovementController player = default;
-        protected EnemyBehaviourController enemy = default;
+        protected ITankController target = default;
         protected Coroutine explodeRoutine = default;
 
         protected virtual void Awake() => explosionsPool = FindAnyObjectByType<ExplosionsPool>();
@@ -41,17 +38,9 @@
 
         protected void OnTriggerEnter2D(Collider2D collision)
         {
-            player = collision.gameObject.GetComponent<PlayerMovementController>();
+            target = collision.gameObject.GetComponent<ITankController>();
 
-            if (player != null)
-            {
-                StartExplode();
-                return;
-            }
-
-            enemy = collision.gameObject.GetComponent<EnemyBehaviourController>();
-
-            if (enemy != null)
+            if (target != null)
             {
                 StartExplode();
             }

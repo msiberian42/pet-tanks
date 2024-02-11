@@ -1,12 +1,13 @@
 ﻿namespace Tanks.Features.Player
 {
     using UnityEngine;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер движения игрока
     /// </summary>
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMovementController : MonoBehaviour
+    public class PlayerMovementController : MonoBehaviour, ITankController
     {
         [SerializeField]
         protected float rotationSpeed = 100f;
