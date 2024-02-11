@@ -1,6 +1,7 @@
 ﻿namespace Tanks.Features.Enemies
 {
     using System;
+    using UnityEngine;
     using Tanks.Features.Shooting;
     using Tanks.Features.Explosion;
 
@@ -13,6 +14,9 @@
         /// Враг уничтожен
         /// </summary>
         public static event Action<EnemyHealthController> onEnemyDeathEvent = delegate { };
+
+        [SerializeField]
+        protected GameObject deathPrefab = default;
 
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
@@ -46,6 +50,8 @@
             explosionController.transform.position = transform.position;
 
             onEnemyDeathEvent(this);
+
+            Instantiate(deathPrefab, transform.position, transform.rotation);
 
             gameObject.SetActive(false);
         }

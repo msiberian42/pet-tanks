@@ -1045,6 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathPrefab: {fileID: 4929776862801317133, guid: 5daa56eb38c37cb4386c7ff7d5fee835, type: 3}
 --- !u!114 &2704736255263635668
 MonoBehaviour:
   m_ObjectHideFlags: 0

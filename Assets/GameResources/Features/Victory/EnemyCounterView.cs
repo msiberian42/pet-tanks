@@ -1,10 +1,10 @@
-namespace Tanks.Features.Victory 
+п»їnamespace Tanks.Features.Victory 
 {
     using UnityEngine;
     using UnityEngine.UI;
 
     /// <summary>
-    /// Вью счетчика врагов
+    /// Р’СЊСЋ СЃС‡РµС‚С‡РёРєР° РІСЂР°РіРѕРІ
     /// </summary>
     public class EnemyCounterView : MonoBehaviour
     {
