@@ -2,14 +2,24 @@
 {
     using System;
     using System.Collections;
-    using UnityEngine;
     using Tanks.Features.Shooting;
+    using UnityEngine;
 
     /// <summary>
-    /// Контроллер башни игрока
+    /// Контроллер пуска ракет
     /// </summary>
-    public class PlayerShootingController : MonoBehaviour
+    public class PlayerMissileLaunchController : MonoBehaviour
     {
+        /// <summary>
+        /// Счетчик ракет
+        /// </summary>
+        public int MissilesCount => missilesCount;
+
+        /// <summary>
+        /// Количество ракет изменилось
+        /// </summary>
+        public event Action onMissilesCountChangedEvent = delegate { };
+
         /// <summary>
         /// Пушка перезаряжена
         /// </summary>
@@ -39,58 +49,41 @@
         protected Transform turret = default;
         [SerializeField]
         protected Transform shootingPoint = default;
-        [SerializeField]
-        protected float projectileSpeed = 10f;
-        [SerializeField]
-        protected float projectileDamage = 35f;
-        [SerializeField]
-        protected float reloadCooldown = 1f;
 
-        protected PlayerProjectilePool projPool = default;
+        [SerializeField]
+        protected float reloadCooldown = 5f;
+        [SerializeField, Min(0)]
+        protected int missilesCount = 4;
+
+        protected PlayerMissilePool missilePool = default;
 
         protected Vector3 rotateDirection = default;
         protected Vector3 shootDirection = default;
         protected float angle = 0f;
         protected bool isLoaded = true;
-        protected PlayerProjectile proj = default;
+        protected PlayerMissile missile = default;
 
-        protected virtual void Awake() => projPool = FindAnyObjectByType<PlayerProjectilePool>();
-
-        /// <summary>
-        /// Вращает башню
-        /// </summary>
-        /// <param name="target"></param>
-        public virtual void RotateTurret(Vector3 target)
-        {
-            rotateDirection = target - turret.transform.position;
-
-            rotateDirection.Normalize();
-
-            angle = Mathf.Atan2(rotateDirection.y, rotateDirection.x) * Mathf.Rad2Deg;
-
-            turret.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
-        }
+        protected virtual void Awake() => missilePool = FindAnyObjectByType<PlayerMissilePool>();
 
         /// <summary>
-        /// Стреляет снарядом в указанную точку
+        /// Запускает ракету
         /// </summary>
         /// <param name="target"></param>
-        public virtual void Shoot(Vector3 target)
+        public virtual void LaunchMissile(Vector3 target)
         {
             shootDirection = target - shootingPoint.transform.position;
 
             shootDirection.Normalize();
 
-            proj = (PlayerProjectile)projPool.GetObject();
+            missile = (PlayerMissile)missilePool.GetObject();
 
-            proj.transform.position = shootingPoint.position;
-            proj.transform.rotation = turret.transform.rotation;
-            proj.SetSpeed(projectileSpeed);
-            proj.SetDamage(projectileDamage);
+            missile.transform.position = shootingPoint.position;
+            missile.transform.rotation = turret.transform.rotation;
 
             onShootEvent();
             isLoaded = false;
             StartCoroutine(LoadingRoutine());
+            ChangeMissileCount(-1);
         }
 
         protected virtual IEnumerator LoadingRoutine()
@@ -101,6 +94,19 @@
 
             isLoaded = true;
             onReloadingFinishedEvent();
+        }
+
+        /// <summary>
+        /// Меняет количество ракет на заданное число
+        /// </summary>
+        /// <param name="value"></param>
+        public virtual void ChangeMissileCount(int value)
+        {
+            missilesCount += value;
+
+            if (missilesCount < 0) missilesCount = 0;
+
+            onMissilesCountChangedEvent();
         }
     }
 }

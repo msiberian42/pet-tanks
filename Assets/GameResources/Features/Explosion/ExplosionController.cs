@@ -31,7 +31,7 @@
         protected EnemyHealthController enemyHealthController = default;
 
         protected float explosionDamage = 40f;
-        protected float lifetime = 4f;
+        protected float lifetime = 1f;
         protected float minPitch = 0.95f;
         protected float maxPitch = 1.05f;
 
@@ -45,7 +45,9 @@
 
         protected virtual void OnEnable()
         {
+            damageTrigger.enabled = true;
             lifetimeRoutine = StartCoroutine(LifetimeRoutine());
+            StartCoroutine(DisableDamageTriggerRoutine());
 
             fireParticles.Play();
             smokeParticles.Play();
@@ -90,7 +92,6 @@
             if (collision.gameObject == player.gameObject)
             {
                 player.ChangeHealthValue(-explosionDamage);
-                pool.ReleaseObject(this);
                 return;
             }
 
@@ -99,8 +100,14 @@
             if (enemyHealthController != null)
             {
                 enemyHealthController.ChangeHealthValue(-explosionDamage);
-                pool.ReleaseObject(this);
             }
+        }
+
+        protected IEnumerator DisableDamageTriggerRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
+
+            damageTrigger.enabled = false;
         }
     }
 }

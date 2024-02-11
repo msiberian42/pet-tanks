@@ -10,7 +10,9 @@
     public class PCShootingInput : MonoBehaviour
     {
         [SerializeField]
-        protected PlayerShootingController controller = default;
+        protected PlayerShootingController shootController = default;
+        [SerializeField]
+        protected PlayerMissileLaunchController missileLaunchController = default;
 
         protected Camera cam = default;
         protected Vector3 mousePos = default;
@@ -41,11 +43,17 @@
 
             mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-            controller.RotateTurret(mousePos);
+            shootController.RotateTurret(mousePos);
 
-            if (Input.GetMouseButtonDown(0) && controller.IsLoaded)
+            if (Input.GetMouseButtonDown(0) && shootController.IsLoaded)
             {
-                controller.Shoot(mousePos);
+                shootController.Shoot(mousePos);
+            }
+
+            if (Input.GetMouseButtonDown(1) && missileLaunchController.IsLoaded 
+                && missileLaunchController.MissilesCount > 0)
+            {
+                missileLaunchController.LaunchMissile(mousePos);
             }
         }
 
