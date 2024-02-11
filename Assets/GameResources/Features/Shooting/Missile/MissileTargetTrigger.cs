@@ -1,6 +1,6 @@
 ﻿namespace Tanks.Features.Shooting
 {
-    using Tanks.Features.Enemies;
+    using Tanks.Features.Interfaces;
     using UnityEngine;
 
     /// <summary>
@@ -12,7 +12,7 @@
         [SerializeField]
         private PlayerMissile _missile = default;
 
-        private EnemyHealthController _enemyHealthController = default;
+        private IPlayerMissileTarget _enemyHealthController = default;
         private bool _hasTarget = false;
 
         private void OnEnable() => _hasTarget = false;
@@ -24,11 +24,11 @@
                 return;
             }
 
-            _enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+            _enemyHealthController = collision.gameObject.GetComponent<IPlayerMissileTarget>();
 
-            if (_enemyHealthController != null && CheckTargetVisibility(_enemyHealthController.transform.position))
+            if (_enemyHealthController != null && CheckTargetVisibility(collision.transform.position))
             {
-                _missile.SetTarget(_enemyHealthController.transform);
+                _missile.SetTarget(collision.transform);
                 _hasTarget = true;
             }
         }

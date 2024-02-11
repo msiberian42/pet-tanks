@@ -1,24 +1,19 @@
 ﻿namespace Tanks.Features.Shooting
 {
     using UnityEngine;
-    using Tanks.Features.Player;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Снаряд врага
     /// </summary>
     public class EnemyProjectile : BaseProjectile
     {
-        protected PlayerHealthController player = default;
+        protected IEnemyProjectileTarget target = default;
 
         protected float speed = 10f;
         protected float damage = 1f;
 
-        protected virtual void Awake()
-        {
-            pool = FindAnyObjectByType<EnemyProjectilePool>();
-            player = FindAnyObjectByType<PlayerHealthController>();
-        }
-
+        protected virtual void Awake() => pool = FindAnyObjectByType<EnemyProjectilePool>();
 
         protected virtual void Update() => transform.Translate(Vector2.up * speed * Time.deltaTime);
 
@@ -39,10 +34,14 @@
             if (collision.gameObject.layer == WALLS_LAYER)
             {
                 pool.ReleaseObject(this);
+                return;
             }
-            else if (collision.gameObject == player.gameObject)
+
+            target = collision.GetComponent<IEnemyProjectileTarget>();
+
+            if (target != null)
             {
-                player.ChangeHealthValue(-damage);
+                target.GetProjectileDamage(damage);
                 pool.ReleaseObject(this);
             }
         }

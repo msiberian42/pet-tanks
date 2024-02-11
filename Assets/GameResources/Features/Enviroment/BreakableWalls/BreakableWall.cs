@@ -1,34 +1,24 @@
 ﻿namespace Tanks.Features.Enviroment
 {
     using UnityEngine;
-    using Tanks.Features.Player;
-    using Tanks.Features.Enemies;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Разрушаемая стена
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class BreakableWall : MonoBehaviour
+    public class BreakableWall : MonoBehaviour, IExplodable
     {
         protected WallCrashEffectsPool crashPool = default;
         protected WallCrashEffect crashEffect = default;
 
-        protected PlayerMovementController player = default;
-        protected EnemyBehaviourController enemy = default;
+        protected ITankController tank = default;
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            player = collision.gameObject.GetComponent<PlayerMovementController>();
+            tank = collision.gameObject.GetComponent<ITankController>();
 
-            if (player != null)
-            {
-                DestroyWall();
-                return;
-            }
-
-            enemy = collision.gameObject.GetComponent<EnemyBehaviourController>();
-
-            if (enemy != null)
+            if (tank != null)
             {
                 DestroyWall();
             }
@@ -46,5 +36,7 @@
 
             gameObject.SetActive(false);
         }
+
+        public void GetExplosionDamage(float damage) => DestroyWall();
     }
 }

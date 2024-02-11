@@ -1,15 +1,16 @@
 ﻿namespace Tanks.Features.Enemies
 {
     using System.Collections;
-    using Tanks.Features.Player;
     using UnityEngine;
     using UnityEngine.AI;
+    using Tanks.Features.Player;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер передвижения врага
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyBehaviourController : MonoBehaviour
+    public class EnemyBehaviourController : MonoBehaviour, IPlayerMissileTarget, ITankController
     {
         /// <summary>
         /// Текущее поведение врага

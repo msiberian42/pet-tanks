@@ -1,7 +1,7 @@
 ﻿namespace Tanks.Features.Shooting
 {
-    using Tanks.Features.Enemies;
     using UnityEngine;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Снаряд игрока
@@ -11,7 +11,8 @@
     {
         protected float speed = 10f;
         protected float damage = 1f;
-        protected EnemyHealthController enemyHealthController = default;
+        protected IPlayerProjectileTarget target = default;
+
         protected virtual void Awake() => pool = FindAnyObjectByType<PlayerProjectilePool>();
 
         protected virtual void Update() => transform.Translate(Vector2.up * speed * Time.deltaTime);
@@ -36,11 +37,11 @@
                 return;
             }
 
-            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
+            target = collision.gameObject.GetComponent<IPlayerProjectileTarget>();
 
-            if (enemyHealthController != null)
+            if (target != null)
             {
-                enemyHealthController.ChangeHealthValue(-damage);
+                target.GetProjectileDamage(damage);
                 pool.ReleaseObject(this);
             }
         }

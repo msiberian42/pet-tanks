@@ -1,8 +1,8 @@
 ﻿namespace Tanks.Features.Shooting
 {
-    using Tanks.Features.Pool;
     using UnityEngine;
     using UnityEngine.Pool;
+    using Tanks.Features.Pool;
 
     /// <summary>
     /// Пул снарядов врага
