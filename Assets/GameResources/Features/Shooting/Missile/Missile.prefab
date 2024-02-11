@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifetime: 20
-  explosionDamage: 70
-  explosionRadius: 2
+  explosionDamage: 150
+  explosionRadius: 3
   missileSpeed: 5
   fireParticles: {fileID: 3866773005046972315}
 --- !u!212 &8498849134373936262
