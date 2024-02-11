@@ -1,5 +1,6 @@
 ﻿namespace Tanks.Features.Enviroment
 {
+    using System.Collections;
     using UnityEngine;
     using Tanks.Features.Enemies;
     using Tanks.Features.Player;
@@ -18,12 +19,25 @@
         [SerializeField]
         protected float explosionRadius = 2f;
 
+        [SerializeField]
+        protected float explodeDelay = 0.5f;
+
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
         protected PlayerMovementController player = default;
         protected EnemyBehaviourController enemy = default;
+        protected Coroutine explodeRoutine = default;
 
         protected virtual void Awake() => explosionsPool = FindAnyObjectByType<ExplosionsPool>();
+
+        protected virtual void OnDisable()
+        {
+            if (explodeRoutine == null)
+            {
+                StopCoroutine(ExplodeRoutine());
+                explodeRoutine = null;
+            }
+        }
 
         protected void OnTriggerEnter2D(Collider2D collision)
         {
@@ -31,7 +45,7 @@
 
             if (player != null)
             {
-                Explode();
+                StartExplode();
                 return;
             }
 
@@ -39,11 +53,11 @@
 
             if (enemy != null)
             {
-                Explode();
+                StartExplode();
             }
         }
 
-        public virtual void Explode()
+        protected virtual void Explode()
         {
             explosionController = explosionsPool.GetObject();
             explosionController.SetExplosionDamage(explosionDamage);
@@ -53,6 +67,21 @@
             gameObject.SetActive(false);
         }
 
-        public void GetExplosionDamage(float damage) => Explode();
+        public void GetExplosionDamage(float damage) => StartExplode();
+
+        protected virtual IEnumerator ExplodeRoutine()
+        {
+            yield return new WaitForSeconds(explodeDelay);
+
+            Explode();
+        }
+
+        protected virtual void StartExplode()
+        {
+            if (explodeRoutine == null)
+            {
+                explodeRoutine = StartCoroutine(ExplodeRoutine());
+            }
+        }
     }
 }
