@@ -50,7 +50,8 @@
                 shootController.Shoot(mousePos);
             }
 
-            if (Input.GetMouseButtonDown(1) && missileLaunchController.IsLoaded)
+            if (Input.GetMouseButtonDown(1) && missileLaunchController.IsLoaded 
+                && missileLaunchController.MissilesCount > 0)
             {
                 missileLaunchController.LaunchMissile(mousePos);
             }

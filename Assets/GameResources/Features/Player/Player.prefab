@@ -809,7 +809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turret: {fileID: 3219186941878563094}
   shootingPoint: {fileID: 5569582992346934346}
-  reloadCooldown: 1
+  reloadCooldown: 5
   missilesCount: 4
 --- !u!50 &4295348515643032569
 Rigidbody2D:

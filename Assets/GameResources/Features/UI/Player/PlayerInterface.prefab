@@ -390,6 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9006294997777966924}
+  - component: {fileID: 7808333502629369363}
   m_Layer: 5
   m_Name: Missiles
   m_TagString: Untagged
@@ -420,6 +421,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7808333502629369363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821864602066167336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ab70dbdef452244a768a4a99c06614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countText: {fileID: 509750215205692082}
+  icon: {fileID: 9127438633721595920}
 --- !u!1 &5586625343982616812
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,16 @@
     public class PlayerMissileLaunchController : MonoBehaviour
     {
         /// <summary>
+        /// Счетчик ракет
+        /// </summary>
+        public int MissilesCount => missilesCount;
+
+        /// <summary>
+        /// Количество ракет изменилось
+        /// </summary>
+        public event Action onMissilesCountChangedEvent = delegate { };
+
+        /// <summary>
         /// Пушка перезаряжена
         /// </summary>
         public bool IsLoaded => isLoaded;
@@ -41,8 +51,8 @@
         protected Transform shootingPoint = default;
 
         [SerializeField]
-        protected float reloadCooldown = 1f;
-        [SerializeField]
+        protected float reloadCooldown = 5f;
+        [SerializeField, Min(0)]
         protected int missilesCount = 4;
 
         protected PlayerMissilePool missilePool = default;
@@ -73,6 +83,7 @@
             onShootEvent();
             isLoaded = false;
             StartCoroutine(LoadingRoutine());
+            ChangeMissileCount(-1);
         }
 
         protected virtual IEnumerator LoadingRoutine()
@@ -83,6 +94,19 @@
 
             isLoaded = true;
             onReloadingFinishedEvent();
+        }
+
+        /// <summary>
+        /// Меняет количество ракет на заданное число
+        /// </summary>
+        /// <param name="value"></param>
+        public virtual void ChangeMissileCount(int value)
+        {
+            missilesCount += value;
+
+            if (missilesCount < 0) missilesCount = 0;
+
+            onMissilesCountChangedEvent();
         }
     }
 }
