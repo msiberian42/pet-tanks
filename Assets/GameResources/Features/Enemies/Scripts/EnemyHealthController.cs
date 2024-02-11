@@ -4,11 +4,12 @@
     using UnityEngine;
     using Tanks.Features.Shooting;
     using Tanks.Features.Explosion;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер здоровья врага
     /// </summary>
-    public class EnemyHealthController : BaseHealthController
+    public class EnemyHealthController : BaseHealthController, IExplodable
     {
         /// <summary>
         /// Враг уничтожен
@@ -31,6 +32,8 @@
         public override void ChangeHealthValue(float value)
         {
             CurrentHealthValue += value;
+
+            CurrentHealthValue = Mathf.Clamp(CurrentHealthValue, 0, MaxHealth);
 
             if (value < 0)
             {
@@ -55,5 +58,7 @@
 
             gameObject.SetActive(false);
         }
+
+        public void GetExplosionDamage(float damage) => ChangeHealthValue(-damage);
     }
 }

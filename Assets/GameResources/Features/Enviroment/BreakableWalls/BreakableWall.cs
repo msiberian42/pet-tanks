@@ -3,12 +3,13 @@
     using UnityEngine;
     using Tanks.Features.Player;
     using Tanks.Features.Enemies;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Разрушаемая стена
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class BreakableWall : MonoBehaviour
+    public class BreakableWall : MonoBehaviour, IExplodable
     {
         protected WallCrashEffectsPool crashPool = default;
         protected WallCrashEffect crashEffect = default;
@@ -46,5 +47,7 @@
 
             gameObject.SetActive(false);
         }
+
+        public void GetExplosionDamage(float damage) => DestroyWall();
     }
 }

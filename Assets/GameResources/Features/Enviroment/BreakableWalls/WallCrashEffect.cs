@@ -20,8 +20,8 @@
         private WallCrashEffectsPool _pool = default;
         private Coroutine _lifetimeRoutine = default;
 
-        protected float minPitch = 0.95f;
-        protected float maxPitch = 1.05f;
+        private float minPitch = 0.95f;
+        private float maxPitch = 1.05f;
 
         private void Awake() => _pool = FindAnyObjectByType<WallCrashEffectsPool>();
 

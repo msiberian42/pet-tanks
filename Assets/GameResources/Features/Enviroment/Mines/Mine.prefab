@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 5173100594129375580}
   - component: {fileID: -6259848700246776854}
   - component: {fileID: 369712990812169686}
+  - component: {fileID: 3080654174494507287}
   - component: {fileID: 5334153699634538812}
   m_Layer: 0
   m_Name: Mine
@@ -285,7 +286,7 @@ Transform:
   - {fileID: 5195353287134725047}
   - {fileID: 2617884925086637339}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-6259848700246776854
 MonoBehaviour:
@@ -336,6 +337,33 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.3
+--- !u!50 &3080654174494507287
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9141647587066454725}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!95 &5334153699634538812
 Animator:
   serializedVersion: 5

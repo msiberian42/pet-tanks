@@ -4,12 +4,13 @@
     using Tanks.Features.Enemies;
     using Tanks.Features.Player;
     using Tanks.Features.Explosion;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер мины
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class MineController : MonoBehaviour
+    public class MineController : MonoBehaviour, IExplodable
     {
         [SerializeField]
         protected float explosionDamage = 80f;
@@ -51,5 +52,7 @@
 
             gameObject.SetActive(false);
         }
+
+        public void GetExplosionDamage(float damage) => Explode();
     }
 }

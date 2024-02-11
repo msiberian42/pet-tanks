@@ -1,14 +1,15 @@
 ﻿namespace Tanks.Features.Player
 {
     using System;
+    using UnityEngine;
     using Tanks.Features.Explosion;
     using Tanks.Features.Shooting;
-    using UnityEngine;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер здоровья игрока
     /// </summary>
-    public class PlayerHealthController : BaseHealthController
+    public class PlayerHealthController : BaseHealthController, IExplodable
     {
         /// <summary>
         /// У игрока кончилось здоровье
@@ -55,5 +56,7 @@
 
             gameObject.SetActive(false);
         }
+
+        public void GetExplosionDamage(float damage) => ChangeHealthValue(-damage);
     }
 }

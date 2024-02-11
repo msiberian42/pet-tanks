@@ -3,8 +3,7 @@
     using System;
     using System.Collections;
     using UnityEngine;
-    using Tanks.Features.Player;
-    using Tanks.Features.Enemies;
+    using Tanks.Features.Interfaces;
 
     /// <summary>
     /// Контроллер взрыва
@@ -27,8 +26,7 @@
         protected CircleCollider2D damageTrigger = default;
         protected ExplosionsPool pool = default;
         protected Coroutine lifetimeRoutine = default;
-        protected PlayerHealthController player = default;
-        protected EnemyHealthController enemyHealthController = default;
+        protected IExplodable explodable = default;
 
         protected float explosionDamage = 40f;
         protected float lifetime = 1f;
@@ -39,7 +37,6 @@
         {
             damageTrigger = GetComponent<CircleCollider2D>();
             damageTrigger.isTrigger = true;
-            player = FindAnyObjectByType<PlayerHealthController>();
             pool = FindAnyObjectByType<ExplosionsPool>();
         }
 
@@ -89,17 +86,11 @@
 
         protected virtual void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject == player.gameObject)
-            {
-                player.ChangeHealthValue(-explosionDamage);
-                return;
-            }
+            explodable = collision.gameObject.GetComponent<IExplodable>();
 
-            enemyHealthController = collision.gameObject.GetComponent<EnemyHealthController>();
-
-            if (enemyHealthController != null)
+            if (explodable != null)
             {
-                enemyHealthController.ChangeHealthValue(-explosionDamage);
+                explodable.GetExplosionDamage(explosionDamage);
             }
         }
 
