@@ -1,6 +1,5 @@
 ﻿namespace Tanks.Features.UI
 {
-    using UnityEditor;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
@@ -10,18 +9,8 @@
     public class LoadSceneButton : BaseButton
     {
         [SerializeField]
-        protected SceneAsset scene = default;
+        protected string sceneName = default;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            if (scene == null)
-            {
-                gameObject.SetActive(false);
-            }
-        }
-
-        protected override void OnButtonClicked() => SceneManager.LoadScene(scene.name);
+        protected override void OnButtonClicked() => SceneManager.LoadScene(sceneName);
     }
 }
