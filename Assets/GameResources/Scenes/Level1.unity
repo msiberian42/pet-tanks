@@ -43488,6 +43488,10 @@ PrefabInstance:
       propertyPath: scene
       value: 
       objectReference: {fileID: 102900000, guid: 162a56fad44e7ad4e97a1c95e7c32a4f, type: 3}
+    - target: {fileID: 210243994435419987, guid: 58430b58f03523b4dbbb83446886ce39, type: 3}
+      propertyPath: sceneName
+      value: Level2
+      objectReference: {fileID: 0}
     - target: {fileID: 4850490993426203983, guid: 58430b58f03523b4dbbb83446886ce39, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -43953,6 +43957,10 @@ PrefabInstance:
     - target: {fileID: 1211958434415311422, guid: ffa14f409c49cd3429745f2d274dd1e0, type: 3}
       propertyPath: m_Name
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040423012140100002, guid: ffa14f409c49cd3429745f2d274dd1e0, type: 3}
+      propertyPath: sceneName
+      value: MainMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

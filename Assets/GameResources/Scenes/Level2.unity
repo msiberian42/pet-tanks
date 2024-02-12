@@ -37020,6 +37020,10 @@ PrefabInstance:
       propertyPath: scene
       value: 
       objectReference: {fileID: 102900000, guid: 152f3e3d227501048b3a9f63fbd61463, type: 3}
+    - target: {fileID: 210243994435419987, guid: 58430b58f03523b4dbbb83446886ce39, type: 3}
+      propertyPath: sceneName
+      value: Level3
+      objectReference: {fileID: 0}
     - target: {fileID: 4850490993426203983, guid: 58430b58f03523b4dbbb83446886ce39, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
