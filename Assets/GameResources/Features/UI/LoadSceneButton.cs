@@ -12,6 +12,16 @@
         [SerializeField]
         protected SceneAsset scene = default;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if (scene == null)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
         protected override void OnButtonClicked() => SceneManager.LoadScene(scene.name);
     }
 }

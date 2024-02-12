@@ -13,7 +13,11 @@
         protected float speed = 10f;
         protected float damage = 1f;
 
-        protected virtual void Awake() => pool = FindAnyObjectByType<EnemyProjectilePool>();
+        protected override void Awake()
+        {
+            base.Awake();
+            pool = FindAnyObjectByType<EnemyProjectilePool>();
+        }
 
         protected virtual void Update() => transform.Translate(Vector2.up * speed * Time.deltaTime);
 
@@ -33,6 +37,7 @@
         {
             if (collision.gameObject.layer == WALLS_LAYER)
             {
+                SpawnEffect();
                 pool.ReleaseObject(this);
                 return;
             }
@@ -41,6 +46,7 @@
 
             if (target != null)
             {
+                SpawnEffect();
                 target.GetProjectileDamage(damage);
                 pool.ReleaseObject(this);
             }

@@ -63,6 +63,11 @@
             }
         }
 
+        /// <summary>
+        /// Восстанавливает ХП
+        /// </summary>
+        public virtual void SetMaxHP() => CurrentHealthValue = MaxHealth;
+
         protected virtual void OnDamageReceived() => onDamageReceivedEvent();
     }
 }

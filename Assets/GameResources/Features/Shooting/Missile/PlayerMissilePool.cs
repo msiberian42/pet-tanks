@@ -27,12 +27,12 @@
         }
 
         /// <summary>
-        /// Возвращает снаряд из пула
+        /// Возвращает ракету из пула
         /// </summary>
         public override BaseProjectile GetObject() => projPool.Get();
 
         /// <summary>
-        /// Возвращает снаряд в пул
+        /// Возвращает ракету в пул
         /// </summary>
         public override void ReleaseObject(BaseProjectile proj) => projPool.Release(proj);
     }
