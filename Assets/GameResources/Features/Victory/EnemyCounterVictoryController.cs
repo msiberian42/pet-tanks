@@ -23,11 +23,17 @@
         [SerializeField]
         protected List<EnemyHealthController> enemies = new List<EnemyHealthController>();
 
-        protected virtual void Awake() => 
+        protected override void Awake()
+        {
+            base.Awake();
             EnemyHealthController.onEnemyDeathEvent += CheckEnemyCount;
+        }
 
-        protected virtual void OnDestroy() => 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
             EnemyHealthController.onEnemyDeathEvent -= CheckEnemyCount;
+        }
 
         public virtual void AddEnemy(EnemyHealthController enemyHealthController)
         {
