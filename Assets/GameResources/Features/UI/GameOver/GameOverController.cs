@@ -3,6 +3,7 @@
     using System;
     using UnityEngine;
     using Tanks.Features.Player;
+    using Tanks.Features.Victory;
 
     /// <summary>
     /// Контроллер, включающий экран гейм овера при смерти игрока
@@ -22,12 +23,22 @@
         protected virtual void Awake()
         {
             playerHealthController = FindAnyObjectByType<PlayerHealthController>();
-            playerHealthController.onPlayerDeathEvent += EnableGameOverScreen;
+            playerHealthController.onPlayerDeathEvent += OnPlayerDeath;
+            VictoryController.onVictoryEvent += OnVictory;
         }
 
-        protected virtual void OnDestroy() => 
-            playerHealthController.onPlayerDeathEvent -= EnableGameOverScreen;
+        protected virtual void OnDestroy()
+        {
+            playerHealthController.onPlayerDeathEvent -= OnPlayerDeath;
+            VictoryController.onVictoryEvent -= OnVictory;
+        }
 
-        protected virtual void EnableGameOverScreen() => gameOverScreen.SetActive(true);
+        protected virtual void OnPlayerDeath()
+        {
+            onGameOverEvent();
+            gameOverScreen.SetActive(true);
+        }
+
+        protected virtual void OnVictory() => gameObject.SetActive(false);
     }
 }
