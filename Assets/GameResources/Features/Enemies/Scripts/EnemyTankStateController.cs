@@ -7,30 +7,20 @@
     using Tanks.Features.Interfaces;
 
     /// <summary>
-    /// Контроллер передвижения врага
+    /// Контроллер состояния врага
     /// </summary>
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyBehaviourController : MonoBehaviour, IPlayerMissileTarget, ITankController
+    public class EnemyTankStateController : MonoBehaviour, IPlayerMissileTarget, IBotTankController
     {
         /// <summary>
         /// Текущее поведение врага
         /// </summary>
-        public BaseEnemyBehaviour CurrentBehaviour => currentBehaviour;
+        public BaseBehaviour CurrentBehaviour /*{ get; protected set; }*/ = default;
 
-        /// <summary>
-        /// Игрок в зоне видимости врага
-        /// </summary>
-        public bool PlayerIsVisible {  get; protected set; } = false;
-
-        /// <summary>
-        /// Готов к стрельбе
-        /// </summary>
-        public bool IsLoaded {  get; protected set; } = true;
-
-        /// <summary>
-        /// Nav Mesh Agent
-        /// </summary>
         public NavMeshAgent Agent { get; protected set; } = default;
+        public Transform Transform => transform;
+        public bool TargetIsVisible { get; protected set; } = false;
+        public bool IsLoaded {  get; protected set; } = true;
 
         [SerializeField, Header("Частота обновления информации о позиции игрока")]
         protected float playerPosUpdateRate = 0.5f;
@@ -39,19 +29,11 @@
         protected float visionRange = 30f;
 
         [SerializeField]
-        protected float rotationSpeed = 3f;
-
-        [SerializeField]
         protected LayerMask wallsLayer = default;
 
-        protected BaseEnemyBehaviour currentBehaviour = default;
         protected PlayerMovementController player = default;
         protected Coroutine checkPlayerRoutine = default;
         protected float reloadCooldown = 1f;
-
-        protected Vector3 direction = default;
-        protected float angle = 0f;
-        protected Quaternion targetRotation = default;
 
         protected virtual void Awake()
         {
@@ -77,46 +59,24 @@
             }
         }
 
-        protected virtual void Update() => currentBehaviour.OnUpdate();
+        protected virtual void Update() => CurrentBehaviour.OnUpdate();
 
         /// <summary>
         /// Меняет поведение врага
         /// </summary>
         /// <param name="behaviour"></param>
-        public virtual void SetCurrentBehaviour(BaseEnemyBehaviour behaviour)
+        public virtual void SetCurrentBehaviour(BaseBehaviour behaviour)
         {
-            currentBehaviour?.OnStateExit();
-            currentBehaviour = behaviour;
-            currentBehaviour.OnStateEnter();
-        }
-
-        /// <summary>
-        /// Двигает врага к указанной точке
-        /// </summary>
-        /// <param name="target"></param>
-        public virtual void Move(Vector3 target) => Agent.SetDestination(target);
-
-        /// <summary>
-        /// Поворачивает танк
-        /// </summary>
-        /// <param name="target"></param>
-        public virtual void RotateTank(Vector3 target)
-        {
-            direction = new Vector2(-Agent.velocity.x, Agent.velocity.y).normalized;
-
-            angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-
-            targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            CurrentBehaviour?.OnStateExit();
+            CurrentBehaviour = behaviour;
+            CurrentBehaviour.OnStateEnter();
         }
 
         protected virtual IEnumerator CheckPlayerRoutine()
         {
             while (isActiveAndEnabled)
             {
-                PlayerIsVisible = CheckPlayerVisible();
+                TargetIsVisible = CheckPlayerVisible();
 
                 yield return new WaitForSeconds(playerPosUpdateRate);
             }
@@ -139,15 +99,8 @@
             return true;
         }
 
-        /// <summary>
-        /// Задает время перезарядки
-        /// </summary>
-        /// <param name="cooldown"></param>
         public virtual void SetReloadingCooldown(float cooldown) => reloadCooldown = cooldown;
 
-        /// <summary>
-        /// Начинает перезарядку
-        /// </summary>
         public virtual void StartReloading() => StartCoroutine(LoadingRoutine());
 
         protected virtual IEnumerator LoadingRoutine()

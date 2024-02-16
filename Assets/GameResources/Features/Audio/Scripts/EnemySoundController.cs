@@ -18,7 +18,7 @@
         [SerializeField]
         protected AudioSource damageSound = default;
 
-        protected AttackEnemyBehaviour attackEnemyBehaviour = default;
+        protected TankAttackBehaviour attackEnemyBehaviour = default;
 
         protected float minPitch = 0.95f;
         protected float maxPitch = 1.05f;

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b6e8276b62ce845bc35fb2ca14bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controller: {fileID: 4076298952979712855}
+  _controller: {fileID: 1609211366114845266}
   _initializer: {fileID: 2763795042450585013}
 --- !u!58 &7641655339982709439
 CircleCollider2D:
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a4e00a2332567459f300f5df2611e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controller: {fileID: 4076298952979712855}
+  _controller: {fileID: 1609211366114845266}
   _initializer: {fileID: 2763795042450585013}
 --- !u!58 &8343667216772197141
 CircleCollider2D:
@@ -962,7 +962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6502279085921629085}
-  - component: {fileID: 4076298952979712855}
+  - component: {fileID: 1609211366114845266}
   - component: {fileID: 2763795042450585013}
   - component: {fileID: 6381315889769968248}
   - component: {fileID: 2704736255263635668}
@@ -996,7 +996,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4076298952979712855
+--- !u!114 &1609211366114845266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1005,12 +1005,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8252167185333801107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3139c190c303f4a8533cd5c607e697, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b9d10506ce9c3e499b2c9848951e211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentBehaviour: {fileID: 0}
   playerPosUpdateRate: 0.5
   visionRange: 25
-  rotationSpeed: 180
   wallsLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1031,7 +1031,7 @@ MonoBehaviour:
   attackBehaviour: {fileID: 11400000, guid: ba614fb40fd7231488905e6b7e125b2a, type: 2}
   turret: {fileID: 8660558893668677589}
   shootingPoint: {fileID: 1275577034851697462}
-  controller: {fileID: 4076298952979712855}
+  controller: {fileID: 1609211366114845266}
 --- !u!114 &6381315889769968248
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@
         {
             foreach (var enemy in enemies)
             {
-                enemy.PatrolBehaviourInstance.SetPatrolPoints(patrolPoints);
+                enemy.PatrolBehaviourInstance.patrolPoints = patrolPoints;
             }
         }
 
@@ -37,7 +37,7 @@
         public virtual void AddEnemy(EnemyBehaviourInitializer enemy)
         {
             enemies.Add(enemy);
-            enemy.PatrolBehaviourInstance.SetPatrolPoints(patrolPoints);
+            enemy.PatrolBehaviourInstance.patrolPoints = patrolPoints;
         }
     }
 }
