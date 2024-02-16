@@ -15,7 +15,7 @@
         /// <summary>
         /// Текущее поведение врага
         /// </summary>
-        public BaseBehaviour CurrentBehaviour /*{ get; protected set; }*/ = default;
+        public BaseBehaviour CurrentBehaviour { get; protected set; } = default;
 
         public NavMeshAgent Agent { get; protected set; } = default;
         public Transform Transform => transform;
