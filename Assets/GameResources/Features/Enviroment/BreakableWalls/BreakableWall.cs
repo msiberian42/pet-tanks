@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using Tanks.Features.Interfaces;
+    using Zenject;
 
     /// <summary>
     /// Разрушаемая стена
@@ -13,6 +14,9 @@
         protected WallCrashEffect crashEffect = default;
 
         protected ITankController tank = default;
+
+        [Inject]
+        protected virtual void Construct(WallCrashEffectsPool crashPool) => this.crashPool = crashPool;
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
@@ -26,11 +30,6 @@
 
         protected virtual void DestroyWall()
         {
-            if (crashPool == null)
-            {
-                crashPool = FindAnyObjectByType<WallCrashEffectsPool>();
-            }
-
             crashEffect = crashPool.GetObject();
             crashEffect.transform.position = transform.position;
 

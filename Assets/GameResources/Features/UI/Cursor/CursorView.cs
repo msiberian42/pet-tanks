@@ -4,6 +4,7 @@
     using UnityEngine.UI;
     using Tanks.Features.Player;
     using Tanks.Features.Victory;
+    using Zenject;
 
     /// <summary>
     /// Кастомное отображение курсора
@@ -16,15 +17,19 @@
         protected PauseController pauseController = default;
         protected PlayerHealthController playerHealthController = default;
 
+        [Inject]
+        protected virtual void Construct(PlayerController player)
+        {
+            playerHealthController = player.HealthController;
+            playerHealthController.onPlayerDeathEvent += DisableCustomCursor;
+        }
+
         protected virtual void Start()
         {
             pauseController = FindAnyObjectByType<PauseController>();
             pauseController.onPauseEnabled += DisableCustomCursor;
             pauseController.onPauseDisabled += EnableCustomCursor;
-
-            playerHealthController = FindAnyObjectByType<PlayerHealthController>();
-            playerHealthController.onPlayerDeathEvent += DisableCustomCursor;
-
+            
             VictoryController.onVictoryEvent += DisableCustomCursor;
         }
 

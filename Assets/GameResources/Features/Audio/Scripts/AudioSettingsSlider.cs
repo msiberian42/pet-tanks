@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using UnityEngine.Audio;
+    using Zenject;
 
     /// <summary>
     /// Слайдер настройки звука
@@ -21,7 +22,6 @@
         protected virtual void Awake()
         {
             slider = GetComponent<Slider>();
-            volumeController = FindAnyObjectByType<AudioVolumeController>();
 
             group.audioMixer.GetFloat(paramName, out float volume);
             slider.value = volume;
@@ -30,6 +30,10 @@
         }
 
         protected virtual void OnDestroy() => slider.onValueChanged.RemoveListener(OnValueChanged);
+
+        [Inject]
+        protected virtual void Construct(AudioVolumeController audioVolumeController) => 
+            volumeController = audioVolumeController;
 
         protected virtual void OnValueChanged(float volume) => 
             volumeController.ChangeVolume(paramName, volume);

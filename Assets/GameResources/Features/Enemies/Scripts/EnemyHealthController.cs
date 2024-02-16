@@ -5,6 +5,7 @@
     using Tanks.Features.Shooting;
     using Tanks.Features.Explosion;
     using Tanks.Features.Interfaces;
+    using Zenject;
 
     /// <summary>
     /// Контроллер здоровья врага
@@ -22,12 +23,8 @@
         protected ExplosionsPool explosionsPool = default;
         protected ExplosionController explosionController = default;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            explosionsPool = FindAnyObjectByType<ExplosionsPool>();
-        }
+        [Inject]
+        protected virtual void Construct(ExplosionsPool explosionsPool) => this.explosionsPool = explosionsPool;
 
         public override void ChangeHealthValue(float value)
         {

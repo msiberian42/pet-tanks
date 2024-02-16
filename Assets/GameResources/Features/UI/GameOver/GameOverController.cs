@@ -4,6 +4,7 @@
     using UnityEngine;
     using Tanks.Features.Player;
     using Tanks.Features.Victory;
+    using Zenject;
 
     /// <summary>
     /// Контроллер, включающий экран гейм овера при смерти игрока
@@ -20,12 +21,14 @@
 
         protected PlayerHealthController playerHealthController = default;
 
-        protected virtual void Awake()
+        [Inject]
+        protected virtual void Construct(PlayerController player)
         {
-            playerHealthController = FindAnyObjectByType<PlayerHealthController>();
+            playerHealthController = player.HealthController;
             playerHealthController.onPlayerDeathEvent += OnPlayerDeath;
-            VictoryController.onVictoryEvent += OnVictory;
         }
+
+        protected virtual void Awake() => VictoryController.onVictoryEvent += OnVictory;
 
         protected virtual void OnDestroy()
         {

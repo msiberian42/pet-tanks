@@ -3,6 +3,7 @@
     using UnityEngine;
     using UnityEngine.UI;
     using Tanks.Features.Player;
+    using Zenject;
 
     /// <summary>
     /// Отображение здоровья игрока
@@ -14,12 +15,14 @@
 
         protected PlayerHealthController controller = default;
 
-        protected virtual void Awake()
+        [Inject]
+        protected virtual void Construct(PlayerController player)
         {
-            controller = FindAnyObjectByType<PlayerHealthController>();
-            view.fillAmount = 1;
+            controller = player.HealthController;
             controller.onHealthValueChangedEvent += OnHealthValueChanged;
         }
+
+        protected virtual void Awake() => view.fillAmount = 1;
 
         protected virtual void OnDestroy() => 
             controller.onHealthValueChangedEvent -= OnHealthValueChanged;
