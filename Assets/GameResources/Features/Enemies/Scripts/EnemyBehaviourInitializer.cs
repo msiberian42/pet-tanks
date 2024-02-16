@@ -47,10 +47,15 @@
         protected PlayerMovementController player = default;
         protected EnemyProjectilePool projectilePool = default;
 
+        [Inject]
+        protected virtual void Construct(PlayerController player, EnemyProjectilePool projectilePool)
+        {
+            this.player = player.MovementController;
+            this.projectilePool = projectilePool;
+        }
+
         protected virtual void Awake()
         {
-            projectilePool = FindAnyObjectByType<EnemyProjectilePool>();
-
             patrolBehaviourInstance = Instantiate(patrolBehaviour);
             chasingBehaviourInstance = Instantiate(chasingBehaviour);
             attackBehaviourInstance = Instantiate(attackBehaviour);
@@ -66,12 +71,6 @@
         }
 
         protected virtual void OnEnable() => SetPatrolBehaviour();
-
-        [Inject]
-        protected virtual void Construct(PlayerController player)
-        {
-            this.player = player.MovementController;
-        }
 
         /// <summary>
         /// Переводит врага в патрулирование

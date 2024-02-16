@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8541849454501194332}
   - component: {fileID: 6777389913142839877}
+  - component: {fileID: 2073577954496858141}
   - component: {fileID: -3948803394254728528}
   m_Layer: 0
   m_Name: GameplaySceneContext
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 2073577954496858141}
   - {fileID: -3948803394254728528}
   _installerPrefabs: []
   _autoRun: 1
@@ -65,6 +67,25 @@ MonoBehaviour:
   _parentNewObjectsUnderSceneContext: 0
   _contractNames: []
   _parentContractNames: []
+--- !u!114 &2073577954496858141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160323523156121056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d87a50a2b70f1724f9b8c33604791e88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poolsParent: {fileID: 0}
+  _enemyProjectilePool: {fileID: 3816657214373503857, guid: 454a8e2f54a41ed4d80c2a0c677ebe27, type: 3}
+  _playerProjectilePool: {fileID: 8694114576214016343, guid: 06b2599054ec05c48831e227bb07b16e, type: 3}
+  _explosionsPool: {fileID: 7244137759534351936, guid: bd261071debac2b4caf7b139cd87ff88, type: 3}
+  _playerMissilePool: {fileID: 3090585775615575491, guid: d3d4eca22a9c5b449b3717729bb9c346, type: 3}
+  _wallCrashEffectsPool: {fileID: 6900557703557867182, guid: bd2f6352f48327542bab0c0c10f893c9, type: 3}
+  _projectileHitEffectPool: {fileID: 7732726650156737108, guid: a37a9a328c7735f489da24cc5bfd02c6, type: 3}
 --- !u!114 &-3948803394254728528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,3 +99,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 7808806387537048612, guid: 2e01b70b4294b7045a9ef5f726844750, type: 3}
+  _playerSpawnPosition: {fileID: 0}
