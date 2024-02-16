@@ -1,6 +1,7 @@
 ﻿namespace Tanks.Features.Enemies
 {
     using System;
+    using Tanks.Features.Interfaces;
     using Tanks.Features.Shooting;
     using UnityEngine;
 
@@ -8,7 +9,7 @@
     /// Поведение врага в атаке
     /// </summary>
     [CreateAssetMenu(menuName = "Enemies/Behaviours/Attack", fileName = "Attack Enemy Behaviour")]
-    public class AttackEnemyBehaviour : BaseEnemyBehaviour
+    public class TankAttackBehaviour : BaseBehaviour
     {
         /// <summary>
         /// Выстрел совершен
@@ -24,7 +25,7 @@
         [SerializeField]
         protected float projectileDamage = 10f;
 
-        protected EnemyBehaviourController controller = default;
+        protected IBotTankController controller = default;
         protected EnemyBehaviourInitializer initializer = default;
         protected EnemyProjectilePool projectilePool = default;
         protected Transform target = default;
@@ -36,7 +37,7 @@
         protected float angle = 0f;
         protected EnemyProjectile projectile = default;
 
-        public virtual void Init(EnemyBehaviourController controller, 
+        public virtual void Init(IBotTankController controller, 
             EnemyBehaviourInitializer initializer, EnemyProjectilePool projectilePool,
             Transform target, Transform turret, Transform shootingPoint)
         {
@@ -62,7 +63,7 @@
 
         public override void OnUpdate()
         {
-            if (controller.PlayerIsVisible)
+            if (controller.TargetIsVisible)
             {
                 RotateTurret(target.position);
 

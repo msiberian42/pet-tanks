@@ -10,7 +10,7 @@
     public class AttackingTriggers : MonoBehaviour
     {
         [SerializeField]
-        private EnemyBehaviourController _controller = default;
+        private EnemyTankStateController _controller = default;
         [SerializeField]
         private EnemyBehaviourInitializer _initializer = default;
 
@@ -27,7 +27,7 @@
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (_player != null && collision.gameObject == _player.gameObject && _controller.PlayerIsVisible)
+            if (_player != null && collision.gameObject == _player.gameObject && _controller.TargetIsVisible)
             {
                 _initializer.SetAttackBehaviour();
             }
@@ -37,7 +37,7 @@
         {
             if (_player != null && collision.gameObject == _player.gameObject
                 && _controller.CurrentBehaviour == _initializer.ChasingBehaviourInstance
-                && _controller.PlayerIsVisible)
+                && _controller.TargetIsVisible)
             {
                 _initializer.SetAttackBehaviour();
             }
