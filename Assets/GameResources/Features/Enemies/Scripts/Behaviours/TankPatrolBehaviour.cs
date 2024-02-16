@@ -14,7 +14,7 @@
         /// Точки патрулирования
         /// </summary>
         public List<Transform> patrolPoints = new List<Transform>();
-
+    
         [SerializeField]
         protected float rotationSpeed = 180f;
 
