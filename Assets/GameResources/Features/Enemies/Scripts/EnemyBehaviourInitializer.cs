@@ -3,6 +3,7 @@
     using Tanks.Features.Player;
     using Tanks.Features.Shooting;
     using UnityEngine;
+    using Zenject;
 
     /// <summary>
     /// Инициализатор всех поведений врага
@@ -46,11 +47,15 @@
         protected PlayerMovementController player = default;
         protected EnemyProjectilePool projectilePool = default;
 
+        [Inject]
+        protected virtual void Construct(PlayerController player, EnemyProjectilePool projectilePool)
+        {
+            this.player = player.MovementController;
+            this.projectilePool = projectilePool;
+        }
+
         protected virtual void Awake()
         {
-            player = FindAnyObjectByType<PlayerMovementController>();
-            projectilePool = FindAnyObjectByType<EnemyProjectilePool>();
-
             patrolBehaviourInstance = Instantiate(patrolBehaviour);
             chasingBehaviourInstance = Instantiate(chasingBehaviour);
             attackBehaviourInstance = Instantiate(attackBehaviour);

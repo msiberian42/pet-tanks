@@ -4,6 +4,7 @@
     using System.Collections;
     using UnityEngine;
     using Tanks.Features.Shooting;
+    using Zenject;
 
     /// <summary>
     /// Контроллер башни игрока
@@ -54,7 +55,8 @@
         protected bool isLoaded = true;
         protected PlayerProjectile proj = default;
 
-        protected virtual void Awake() => projPool = FindAnyObjectByType<PlayerProjectilePool>();
+        [Inject]
+        protected virtual void Construct(PlayerProjectilePool projPool) => this.projPool = projPool;
 
         /// <summary>
         /// Вращает башню

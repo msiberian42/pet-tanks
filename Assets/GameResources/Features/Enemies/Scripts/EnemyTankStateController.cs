@@ -5,6 +5,7 @@
     using UnityEngine.AI;
     using Tanks.Features.Player;
     using Tanks.Features.Interfaces;
+    using Zenject;
 
     /// <summary>
     /// Контроллер состояния врага
@@ -35,13 +36,17 @@
         protected Coroutine checkPlayerRoutine = default;
         protected float reloadCooldown = 1f;
 
+        [Inject]
+        protected virtual void Construct(PlayerController player)
+        {
+            this.player = player.MovementController;
+        }
+
         protected virtual void Awake()
         {
             Agent = GetComponent<NavMeshAgent>();
             Agent.updateRotation = false;
             Agent.updateUpAxis = false;
-
-            player = FindAnyObjectByType<PlayerMovementController>();
         }
 
         protected virtual void OnEnable()

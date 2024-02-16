@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using UnityEngine.Audio;
+    using Zenject;
 
     /// <summary>
     /// Контроллер громкости
@@ -11,9 +12,9 @@
         [SerializeField]
         protected AudioMixerGroup group = default;
         [SerializeField]
-        protected string soundsParamName = default;
+        protected string soundsParamName = "SoundsVolume";
         [SerializeField]
-        protected string musicParamName = default;
+        protected string musicParamName = "MusicVolume";
         [SerializeField]
         protected float defaultValue = -20f;
 

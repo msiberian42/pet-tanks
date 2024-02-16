@@ -4,6 +4,7 @@
     using UnityEngine;
     using Tanks.Features.Interfaces;
     using Tanks.Features.Explosion;
+    using Zenject;
 
     /// <summary>
     /// Контроллер мины
@@ -25,7 +26,8 @@
         protected ITankController target = default;
         protected Coroutine explodeRoutine = default;
 
-        protected virtual void Awake() => explosionsPool = FindAnyObjectByType<ExplosionsPool>();
+        [Inject]
+        protected virtual void Construct(ExplosionsPool explosionsPool) => this.explosionsPool = explosionsPool;
 
         protected virtual void OnDisable()
         {

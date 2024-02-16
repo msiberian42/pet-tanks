@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections;
+    using Tanks.Features.Explosion;
     using Tanks.Features.Shooting;
     using UnityEngine;
+    using Zenject;
 
     /// <summary>
     /// Контроллер пуска ракет
@@ -63,7 +65,8 @@
         protected bool isLoaded = true;
         protected PlayerMissile missile = default;
 
-        protected virtual void Awake() => missilePool = FindAnyObjectByType<PlayerMissilePool>();
+        [Inject]
+        protected virtual void Construct(PlayerMissilePool missilePool) => this.missilePool = missilePool;
 
         /// <summary>
         /// Запускает ракету
@@ -103,6 +106,19 @@
         public virtual void ChangeMissileCount(int value)
         {
             missilesCount += value;
+
+            if (missilesCount < 0) missilesCount = 0;
+
+            onMissilesCountChangedEvent();
+        }
+
+        /// <summary>
+        /// Задает количество ракет
+        /// </summary>
+        /// <param name="value"></param>
+        public virtual void SetMissileCount(int value)
+        {
+            missilesCount = value;
 
             if (missilesCount < 0) missilesCount = 0;
 
