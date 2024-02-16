@@ -1,11 +1,11 @@
-namespace Tanks.Features.DI
+п»їnamespace Tanks.Features.DI
 {
     using Zenject;
     using UnityEngine;
     using Tanks.Features.Player;
 
     /// <summary>
-    /// Инсталлер зависимостей игрока
+    /// РРЅСЃС‚Р°Р»Р»РµСЂ Р·Р°РІРёСЃРёРјРѕСЃС‚РµР№ РёРіСЂРѕРєР°
     /// </summary>
     public sealed class PlayerGameplayInstaller : MonoInstaller
     {

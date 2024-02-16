@@ -1,9 +1,9 @@
-namespace Tanks.Features.Player
+п»їnamespace Tanks.Features.Player
 {
     using UnityEngine;
 
     /// <summary>
-    /// Контроллер игрока
+    /// РљРѕРЅС‚СЂРѕР»Р»РµСЂ РёРіСЂРѕРєР°
     /// </summary>
     public class PlayerController : MonoBehaviour
     {

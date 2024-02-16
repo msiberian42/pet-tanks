@@ -2,6 +2,7 @@
 {
     using Tanks.Features.Player;
     using UnityEngine;
+    using Zenject;
 
     /// <summary>
     /// Триггер перехода из патрулирования в преследование
@@ -17,12 +18,13 @@
         private PlayerMovementController _player = default;
         private Collider2D _coll = default;
 
+        [Inject]
+        private void Construct(PlayerController player) => _player = player.MovementController;
+
         private void Awake()
         {
             _coll = GetComponent<Collider2D>();
             _coll.isTrigger = true;
-
-            _player = FindAnyObjectByType<PlayerMovementController>();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
