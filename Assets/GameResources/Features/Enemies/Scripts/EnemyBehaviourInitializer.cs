@@ -3,6 +3,7 @@
     using Tanks.Features.Player;
     using Tanks.Features.Shooting;
     using UnityEngine;
+    using Zenject;
 
     /// <summary>
     /// Инициализатор всех поведений врага
@@ -48,7 +49,6 @@
 
         protected virtual void Awake()
         {
-            player = FindAnyObjectByType<PlayerMovementController>();
             projectilePool = FindAnyObjectByType<EnemyProjectilePool>();
 
             patrolBehaviourInstance = Instantiate(patrolBehaviour);
@@ -66,6 +66,12 @@
         }
 
         protected virtual void OnEnable() => SetPatrolBehaviour();
+
+        [Inject]
+        protected virtual void Construct(PlayerController player)
+        {
+            this.player = player.MovementController;
+        }
 
         /// <summary>
         /// Переводит врага в патрулирование

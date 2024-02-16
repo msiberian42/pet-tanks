@@ -108,5 +108,18 @@
 
             onMissilesCountChangedEvent();
         }
+
+        /// <summary>
+        /// Задает количество ракет
+        /// </summary>
+        /// <param name="value"></param>
+        public virtual void SetMissileCount(int value)
+        {
+            missilesCount = value;
+
+            if (missilesCount < 0) missilesCount = 0;
+
+            onMissilesCountChangedEvent();
+        }
     }
 }

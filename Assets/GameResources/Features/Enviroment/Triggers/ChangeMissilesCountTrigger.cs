@@ -7,9 +7,9 @@
     /// Триггер, добавляющий ракеты игроку
     /// </summary>
     [RequireComponent(typeof(Collider2D))]
-    public class AddMissilesTrigger : MonoBehaviour
+    public class ChangeMissilesCountTrigger : MonoBehaviour
     {
-        [SerializeField, Min(1)]
+        [SerializeField]
         protected int missileCount = 4;
 
         protected Collider2D coll = default;
