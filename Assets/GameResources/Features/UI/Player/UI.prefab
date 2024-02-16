@@ -1369,7 +1369,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 797, y: -436}
+  m_AnchoredPosition: {x: 719, y: -387}
   m_SizeDelta: {x: 130, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5565919921294730964
@@ -2949,7 +2949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f8a5e74f026f4ebb9d74f8c12a8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 14a877f33019d774696fa2bf3fd1ec8e, type: 3}
+  sceneName: 
 --- !u!1001 &6297435208165705342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3377,7 +3377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f8a5e74f026f4ebb9d74f8c12a8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 14a877f33019d774696fa2bf3fd1ec8e, type: 3}
+  sceneName: 
 --- !u!224 &5885508038593719965 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3905433364360293032, guid: e5272e07fd896c641990844d409b662f, type: 3}
@@ -3639,7 +3639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09f8a5e74f026f4ebb9d74f8c12a8b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: {fileID: 102900000, guid: 14a877f33019d774696fa2bf3fd1ec8e, type: 3}
+  sceneName: 
 --- !u!224 &5191301371288779378 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3905433364360293032, guid: e5272e07fd896c641990844d409b662f, type: 3}

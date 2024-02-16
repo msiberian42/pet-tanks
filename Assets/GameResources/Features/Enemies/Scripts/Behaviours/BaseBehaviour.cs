@@ -5,7 +5,7 @@
     /// <summary>
     /// Базовое поведение врага
     /// </summary>
-    public abstract class BaseEnemyBehaviour : ScriptableObject
+    public abstract class BaseBehaviour : ScriptableObject
     {
         /// <summary>
         /// Просчитывает логику при входе в поведение

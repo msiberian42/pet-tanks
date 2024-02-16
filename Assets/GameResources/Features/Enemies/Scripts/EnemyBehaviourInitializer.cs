@@ -12,36 +12,36 @@
         /// <summary>
         /// Патрулирование
         /// </summary>
-        public PatrolEnemyBehaviour PatrolBehaviourInstance => patrolBehaviourInstance;
+        public TankPatrolBehaviour PatrolBehaviourInstance => patrolBehaviourInstance;
 
         /// <summary>
         /// Преследование
         /// </summary>
-        public ChasingEnemyBehaviour ChasingBehaviourInstance => chasingBehaviourInstance;
+        public TankChasingBehaviour ChasingBehaviourInstance => chasingBehaviourInstance;
 
         /// <summary>
         /// Атака
         /// </summary>
-        public AttackEnemyBehaviour AttackBehaviourInstance => attackBehaviourInstance;
+        public TankAttackBehaviour AttackBehaviourInstance => attackBehaviourInstance;
 
         [SerializeField]
-        protected ChasingEnemyBehaviour chasingBehaviour = default;
+        protected TankChasingBehaviour chasingBehaviour = default;
         [SerializeField]
-        protected PatrolEnemyBehaviour patrolBehaviour = default;
+        protected TankPatrolBehaviour patrolBehaviour = default;
         [SerializeField]
-        protected AttackEnemyBehaviour attackBehaviour = default;
+        protected TankAttackBehaviour attackBehaviour = default;
 
         [SerializeField]
         protected Transform turret = default;
         [SerializeField]
         protected Transform shootingPoint = default;
 
-        protected PatrolEnemyBehaviour patrolBehaviourInstance = default;
-        protected ChasingEnemyBehaviour chasingBehaviourInstance = default;
-        protected AttackEnemyBehaviour attackBehaviourInstance = default;
+        protected TankPatrolBehaviour patrolBehaviourInstance = default;
+        protected TankChasingBehaviour chasingBehaviourInstance = default;
+        protected TankAttackBehaviour attackBehaviourInstance = default;
 
         [SerializeField]
-        protected EnemyBehaviourController controller = default;
+        protected EnemyTankStateController controller = default;
 
         protected PlayerMovementController player = default;
         protected EnemyProjectilePool projectilePool = default;
