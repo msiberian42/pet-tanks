@@ -11,11 +11,14 @@
     {
         [SerializeField]
         protected float rotationSpeed = 180f;
+        [SerializeField]
+        protected float attackingDistance = 12f;
 
         protected IBotTankController controller = default;
+        protected EnemyBehaviourInitializer initializer = default;
         protected Transform target = default;
 
-        protected Vector3 lastPlayerPos = default;
+        protected Vector3 lastTargetPos = default;
         protected float distanceToTarget = 0f;
 
         protected Vector3 direction = default;
@@ -26,11 +29,12 @@
         /// Инициализирует поведение
         /// </summary>
         /// <param name="controller"></param>
-        /// <param name="player"></param>
-        public virtual void Init(IBotTankController controller, Transform player)
+        /// <param name="target"></param>
+        public virtual void Init(IBotTankController controller, EnemyBehaviourInitializer initializer, Transform target)
         {
             this.controller = controller;
-            target = player;
+            this.initializer = initializer;
+            this.target = target;
         }
 
         public override void OnStateEnter() => controller.Agent.isStopped = false;
@@ -41,21 +45,29 @@
         {
             if (controller.TargetIsVisible)
             {
-                lastPlayerPos = target.position;
-                Move(lastPlayerPos);
-                RotateTank(lastPlayerPos);
+                lastTargetPos = target.position;
+
+                if (Vector3.Distance(controller.Transform.position, lastTargetPos) <= attackingDistance)
+                {
+                    initializer.SetAttackBehaviour();
+                }
+                else
+                {
+                    Move(lastTargetPos);
+                    RotateTank(lastTargetPos);
+                }
             }
-            else if (lastPlayerPos != default 
-                && Vector3.Distance(controller.Transform.position, lastPlayerPos) >= 1f)
+            else if (lastTargetPos != default 
+                && Vector3.Distance(controller.Transform.position, lastTargetPos) >= 1f)
             {
-                Move(lastPlayerPos);
-                RotateTank(lastPlayerPos);
+                Move(lastTargetPos);
+                RotateTank(lastTargetPos);
             }
-            else if (lastPlayerPos != default)
+            else if (lastTargetPos != default)
             {
-                lastPlayerPos = target.position;
-                Move(lastPlayerPos);
-                RotateTank(lastPlayerPos);
+                lastTargetPos = target.position;
+                Move(lastTargetPos);
+                RotateTank(lastTargetPos);
             }
         }
 

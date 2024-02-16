@@ -33,16 +33,6 @@
             }
         }
 
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (_player != null && collision.gameObject == _player.gameObject
-                && _controller.CurrentBehaviour == _initializer.ChasingBehaviourInstance
-                && _controller.TargetIsVisible)
-            {
-                _initializer.SetAttackBehaviour();
-            }
-        }
-
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (_player != null && collision.gameObject == _player.gameObject)

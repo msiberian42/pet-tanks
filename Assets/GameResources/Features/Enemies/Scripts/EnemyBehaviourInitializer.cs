@@ -59,7 +59,7 @@
 
             if (player != null)
             {
-                chasingBehaviourInstance.Init(controller, player.transform);
+                chasingBehaviourInstance.Init(controller, this, player.transform);
                 attackBehaviourInstance.Init(controller: controller, initializer: this, projectilePool: projectilePool,
                     target: player.transform, turret: turret, shootingPoint: shootingPoint);
             }
